@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG ACADEMY | Kho Video & Giải Bài Tập Office 2019</title>
+    <title>HNG ACADEMY</title>
     <!-- Fonts Gaming / Cyberpunk -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -32,7 +32,6 @@
             position: relative;
         }
 
-        /* Canvas Nền Ngân Hà & Ngôi Sao Lóng Lánh */
         #particle-canvas {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -40,7 +39,6 @@
             z-index: 0;
         }
 
-        /* Ambient Glow Background Spheres */
         .glow-sphere {
             position: fixed;
             border-radius: 50%;
@@ -58,7 +56,6 @@
             100% { transform: scale(1.2) translate(30px, 40px); }
         }
 
-        /* Main Container */
         .layout-wrapper {
             position: relative;
             z-index: 10;
@@ -67,7 +64,6 @@
             padding: 40px 20px;
         }
 
-        /* Header Lung Linh */
         header {
             text-align: center;
             margin-bottom: 40px;
@@ -92,7 +88,24 @@
             font-weight: 500;
         }
 
-        /* Thanh Tìm Kiếm & Bộ Lọc Category */
+        /* Hiệu ứng chữ vàng kim lấp lánh */
+        .gold-author {
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffe066 0%, #ffd700 40%, #ffffff 50%, #ffd700 60%, #b8860b 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+            animation: goldShine 4s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes goldShine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
         .filter-section {
             display: flex;
             flex-direction: column;
@@ -153,14 +166,12 @@
             transform: translateY(-2px);
         }
 
-        /* Lưới Card Album/Playlist */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 28px;
         }
 
-        /* Thẻ Album Gọn Gàng */
         .video-card {
             background: var(--card-bg);
             border-radius: 18px;
@@ -199,7 +210,6 @@
             transform: scale(1.08);
         }
 
-        /* Tag Số Lượng Video trong Album */
         .playlist-count-badge {
             position: absolute;
             bottom: 10px; right: 10px;
@@ -270,7 +280,6 @@
             box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
         }
 
-        /* MODAL YOUTUBE PLAYLIST CHUYÊN NGHIỆP */
         .modal-player {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -296,7 +305,6 @@
             position: relative;
         }
 
-        /* Khung bên trái: Màn hình Video */
         .main-video-area {
             flex: 2.2;
             display: flex;
@@ -349,7 +357,6 @@
             transform: translateY(-2px);
         }
 
-        /* Khung bên phải: Danh sách bài hát/video (Playlist) */
         .playlist-sidebar {
             flex: 1;
             background: #0f172a;
@@ -434,7 +441,6 @@
 </head>
 <body>
 
-    <!-- Dynamic Background -->
     <div class="glow-sphere glow-1"></div>
     <div class="glow-sphere glow-2"></div>
     <canvas id="particle-canvas"></canvas>
@@ -442,10 +448,12 @@
     <div class="layout-wrapper">
         <header>
             <h1 class="brand-title">HNG ACADEMY</h1>
-            <p class="brand-subtitle">Trọn Bộ Video Giải Đề Excel 2019 & Mẹo Học Tập</p>
+            <p class="brand-subtitle">
+                Trang Web được sáng lập và độc quyền bởi 
+                <span class="gold-author">HNG/HoàiNg</span>
+            </p>
         </header>
 
-        <!-- Filter & Search -->
         <div class="filter-section">
             <div class="search-box">
                 <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm đề thi Excel, Word, VLOOKUP..." onkeyup="filterVideos()">
@@ -459,10 +467,7 @@
             </div>
         </div>
 
-        <!-- Danh sách Các Mục Lớn -->
         <div class="video-grid" id="videoContainer">
-
-            <!-- MỤC LỚN 1: EXCEL 2019 -->
             <div class="video-card" data-category="excel2019" data-title="bộ bài giải excel 2019 và file đề" onclick="openPlaylist(0)">
                 <div class="thumb-box">
                     <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&auto=format&fit=crop" alt="Excel 2019">
@@ -476,7 +481,6 @@
                 </div>
             </div>
 
-            <!-- MỤC LỚN 2: WORD 2019 -->
             <div class="video-card" data-category="word2019" data-title="bộ bài giải word 2019 và file đề" onclick="openPlaylist(1)">
                 <div class="thumb-box">
                     <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&auto=format&fit=crop" alt="Word 2019">
@@ -489,15 +493,12 @@
                     <button class="btn-open-album">▶ Mở Danh Sách Video</button>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- MODAL PLAYLIST YOUTUBE -->
     <div class="modal-player" id="playlistModal">
         <span class="close-modal-btn" onclick="closePlaylist()">&times;</span>
         <div class="playlist-layout">
-            
             <div class="main-video-area">
                 <div class="video-frame-container">
                     <iframe id="mainIframe" src="" allowfullscreen></iframe>
@@ -514,7 +515,6 @@
                 <div class="playlist-header" id="playlistHeaderTitle">DANH SÁCH BÀI GIẢI</div>
                 <div class="playlist-items-list" id="playlistItemsContainer"></div>
             </div>
-
         </div>
     </div>
 
@@ -543,7 +543,6 @@
             }
         ];
 
-        /* CANVAS BACKGROUND */
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -582,7 +581,6 @@
         window.addEventListener('resize', initCanvas);
         initCanvas(); drawParticles();
 
-        /* MODAL & PLAYLIST */
         let currentAlbumIndex = 0;
 
         function openPlaylist(albumIdx) {
@@ -596,7 +594,6 @@
             container.innerHTML = '';
 
             album.videos.forEach((vid, vIdx) => {
-                // Tự động lấy thumbnail chuẩn từ ID YouTube
                 const autoYtThumb = `https://img.youtube.com/vi/${vid.youtubeId}/mqdefault.jpg`;
                 
                 const item = document.createElement('div');
@@ -635,7 +632,6 @@
             document.getElementById('playlistModal').style.display = 'none';
         }
 
-        /* FILTER */
         let activeCategory = 'all';
         function filterCategory(cat, btn) {
             activeCategory = cat;
