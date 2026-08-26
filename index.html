@@ -58,11 +58,51 @@
             background: linear-gradient(135deg, #E8F4F8 0%, #FFF5E6 100%);
         }
 
-        /* ===== THEME TOGGLE BUTTON ===== */
-        .theme-toggle-btn {
+        /* ===== CONTAINER CHỨA NÚT Ở GÓC TRÊN BÊN PHẢI ===== */
+        .top-right-controls {
             position: fixed;
             top: 20px;
             right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        /* ===== NÚT GÓP Ý ===== */
+        .feedback-toggle-btn {
+            height: 60px;
+            padding: 0 20px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
+            border: 2px solid var(--primary-neon);
+            color: #000;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .feedback-toggle-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(0, 255, 204, 0.8), 0 0 50px rgba(255, 0, 127, 0.5);
+        }
+
+        body.light-mode .feedback-toggle-btn {
+            background: linear-gradient(135deg, #06B6D4, #A78BFA);
+            border-color: #06B6D4;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+        }
+
+        /* ===== THEME TOGGLE BUTTON ===== */
+        .theme-toggle-btn {
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -71,7 +111,6 @@
             color: #000;
             font-size: 1.8rem;
             cursor: pointer;
-            z-index: 999;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -98,6 +137,123 @@
 
         body.light-mode .theme-toggle-btn:hover {
             box-shadow: 0 0 35px rgba(6, 182, 212, 0.8), 0 0 50px rgba(167, 139, 250, 0.5);
+        }
+
+        /* ===== MODAL FEEDBACK ===== */
+        .modal-feedback {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+        }
+
+        .feedback-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 18px;
+            border: 2px solid var(--primary-neon);
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            box-shadow: 0 0 35px rgba(0, 255, 204, 0.3);
+            backdrop-filter: blur(15px);
+        }
+
+        body.light-mode .feedback-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: #06B6D4;
+            box-shadow: 0 0 35px rgba(6, 182, 212, 0.3);
+        }
+
+        .feedback-title {
+            text-align: center;
+            color: var(--primary-neon);
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        body.light-mode .feedback-title {
+            color: #06B6D4;
+        }
+
+        .fb-input {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .fb-input {
+            background: #f8fafc;
+            border-color: rgba(6, 182, 212, 0.4);
+            color: #1e293b;
+        }
+
+        .fb-input:focus {
+            border-color: var(--primary-neon);
+            box-shadow: 0 0 12px rgba(0, 255, 204, 0.3);
+        }
+
+        body.light-mode .fb-input:focus {
+            border-color: #06B6D4;
+            box-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
+        }
+
+        .fb-textarea {
+            resize: vertical;
+        }
+
+        .btn-submit-feedback {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00ffcc, #00b8ff);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+        }
+
+        body.light-mode .btn-submit-feedback {
+            background: linear-gradient(135deg, #06B6D4, #A78BFA);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+
+        .btn-submit-feedback:hover {
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.7);
+        }
+
+        .close-feedback {
+            position: absolute;
+            top: 12px; right: 18px;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .close-feedback {
+            color: #1e293b;
+        }
+
+        .close-feedback:hover {
+            transform: rotate(90deg) scale(1.2);
         }
 
         #particle-canvas {
@@ -721,12 +877,22 @@
         }
 
         @media (max-width: 768px) {
+            .top-right-controls {
+                top: 15px;
+                right: 15px;
+                gap: 8px;
+            }
+
+            .feedback-toggle-btn {
+                height: 50px;
+                padding: 0 14px;
+                font-size: 0.85rem;
+            }
+
             .theme-toggle-btn {
                 width: 50px;
                 height: 50px;
                 font-size: 1.4rem;
-                top: 15px;
-                right: 15px;
             }
 
             .playlist-layout { flex-direction: column; height: 90vh; }
@@ -825,7 +991,6 @@
         .hng-bot-face::before { left: 9px; }
         .hng-bot-face::after { right: 9px; }
 
-        /* KHI BẬT TÍNH NĂNG NÉ CHUỘT -> MÁ HỒNG ĐẬM LÊN VÀ PHỒNG CUTE */
         .hng-waving .hng-bot-face::before,
         .hng-waving .hng-bot-face::after {
             opacity: 1;
@@ -899,7 +1064,6 @@
         .hng-bot-arm.left { left: 10px; transform: rotate(18deg); }
         .hng-bot-arm.right { right: 10px; transform: rotate(-18deg); }
 
-        /* ANIMATION VẪY TAY HOẢNG HỐT KHI NÉ CHUỘT */
         .hng-waving .hng-bot-arm.left {
             animation: hngWaveArmLeft 0.12s infinite alternate ease-in-out;
         }
@@ -1024,7 +1188,6 @@
                 animation: none !important;
             }
         }
-
     </style>
 </head>
 <body>
@@ -1051,10 +1214,34 @@
         </div>
     </div>
 
-    <!-- ===== THEME TOGGLE BUTTON ===== -->
-    <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-        <span id="themeIcon">🌙</span>
-    </button>
+    <!-- ===== CONTAINER NÚT GÓP Ý VÀ ĐỔI GIAO DIỆN (NẰM CẠNH NHAU Ở GÓC TRÊN BÊN PHẢI) ===== -->
+    <div class="top-right-controls">
+        <button class="feedback-toggle-btn" onclick="openFeedback()">💬 Góp Ý</button>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <span id="themeIcon">🌙</span>
+        </button>
+    </div>
+
+    <!-- ===== MODAL BẢNG GÓP Ý ===== -->
+    <div class="modal-feedback" id="feedbackModal">
+        <div class="feedback-content">
+            <span class="close-feedback" onclick="closeFeedback()">&times;</span>
+            <h2 class="feedback-title">GỬI Ý KIẾN</h2>
+            <form id="feedbackForm">
+                <!-- ACCESS KEY CỦA WEB3FORMS -->
+                <input type="hidden" name="access_key" value="b99a548e-7ae5-4031-9603-dd6af26ae6b2">
+                
+                <!-- Tiêu đề email nhận về Gmail -->
+                <input type="hidden" name="subject" value="HNG ACADEMY - Ý kiến đóng góp mới!">
+
+                <input type="text" name="Tên" class="fb-input" placeholder="Tên của bạn..." required>
+                <input type="text" name="Lớp" class="fb-input" placeholder="Lớp của bạn..." required>
+                <textarea name="Nội Dung" class="fb-input fb-textarea" placeholder="Nội dung ý kiến..." rows="4" required></textarea>
+                
+                <button type="submit" class="btn-submit-feedback">GỬI Ý KIẾN 🚀</button>
+            </form>
+        </div>
+    </div>
 
     <div class="glow-sphere glow-1"></div>
     <div class="glow-sphere glow-2"></div>
@@ -1134,6 +1321,48 @@
     </div>
 
     <script>
+        // ===== TÍNH NĂNG GÓP Ý =====
+        function openFeedback() {
+            document.getElementById('feedbackModal').style.display = 'flex';
+        }
+
+        function closeFeedback() {
+            document.getElementById('feedbackModal').style.display = 'none';
+        }
+
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+            const submitBtn = form.querySelector('.btn-submit-feedback');
+
+            submitBtn.innerText = "ĐANG GỬI...";
+            submitBtn.disabled = true;
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Cảm Ơn Bạn Đã Gửi Ý Kiến Chúng Tôi Sẽ Sớm Xem Xét .");
+                    form.reset();
+                    closeFeedback();
+                } else {
+                    alert("Có lỗi xảy ra, vui lòng thử lại sau.");
+                }
+            })
+            .catch(error => {
+                alert("Lỗi kết nối mạng!");
+            })
+            .finally(() => {
+                submitBtn.innerText = "GỬI Ý KIẾN 🚀";
+                submitBtn.disabled = false;
+            });
+        });
+
         // ===== THEME TOGGLE FUNCTION =====
         function toggleTheme() {
             const body = document.body;
@@ -1379,7 +1608,7 @@
                 eye.style.transform = `translate(${eyeX}px, ${eyeY}px)`;
             });
 
-            // 2. NÉ CHUỘT + VÙNG VẪY CÁNH TAY & MÁ HỒNG HẠO HẠO
+            // 2. NÉ CHUỘT + VÙNG VẪY CÁNH TAY & MÁ HỒNG
             if (now - hngBotLastEscape < 850) return;
 
             const distToBot = Math.hypot(e.clientX - cx, e.clientY - cy);
@@ -1389,7 +1618,6 @@
 
                 const moveRight = e.clientX < cx;
                 
-                // Thêm class kích hoạt vẫy tay + má hồng
                 hngBotCharacter.classList.add('hng-waving');
                 hngBotCharacter.classList.remove('hng-run-right', 'hng-run-left');
                 void hngBotCharacter.offsetWidth;
@@ -1398,7 +1626,6 @@
                 const offset = moveRight ? 60 : -60;
                 hngBotCharacter.style.transform = `translateX(${offset}px)`;
 
-                // Hết thời gian né thì ngưng vẫy tay và má hồng trở lại bình thường
                 setTimeout(() => {
                     hngBotCharacter.style.transform = 'translateX(0px)';
                     hngBotCharacter.classList.remove('hng-waving');
