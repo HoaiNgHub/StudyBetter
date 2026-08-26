@@ -555,6 +555,7 @@
             }
         ];
 
+        // Canvas Effect
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -595,6 +596,7 @@
 
         let currentAlbumIndex = 0;
 
+        // Open Playlist Modal
         function openPlaylist(albumIdx) {
             currentAlbumIndex = albumIdx;
             const album = albumsData[albumIdx];
@@ -625,6 +627,7 @@
             document.getElementById('playlistModal').style.display = 'flex';
         }
 
+        // Select Video inside Modal
         function selectVideo(videoIdx) {
             const album = albumsData[currentAlbumIndex];
             const vid = album.videos[videoIdx];
@@ -639,11 +642,13 @@
             });
         }
 
+        // Close Modal
         function closePlaylist() {
             document.getElementById('mainIframe').src = '';
             document.getElementById('playlistModal').style.display = 'none';
         }
 
+        // Filter Categories & Search
         let activeCategory = 'all';
         function filterCategory(cat, btn) {
             activeCategory = cat;
