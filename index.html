@@ -1858,7 +1858,7 @@
 
                 const angle = Math.atan2(e.clientY - eyeCy, e.clientX - eyeCx);
                 const maxDistance = 4;
-                const distance = Math.min(maxDistance, Math.hypot(e.clientX - eyeCx, e.clientY - eyeCx) / 10);
+                const distance = Math.min(maxDistance, Math.hypot(e.clientX - eyeCx, e.clientX - eyeCx) / 10);
 
                 const eyeX = Math.cos(angle) * distance;
                 const eyeY = Math.sin(angle) * distance;
