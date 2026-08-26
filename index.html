@@ -738,9 +738,272 @@
             .main-video-area { height: 50%; }
             .playlist-sidebar { height: 50%; }
         }
+
+        /* ===== HNG BOT ===== */
+        #hngBot {
+            position: fixed;
+            top: 18px;
+            left: 18px;
+            width: 190px;
+            z-index: 998;
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            pointer-events: none;
+            transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: transform;
+        }
+
+        .hng-bot-character {
+            width: 92px;
+            height: 112px;
+            flex: 0 0 92px;
+            position: relative;
+            pointer-events: auto;
+            cursor: default;
+            animation: hngBotFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 12px rgba(0, 255, 204, 0.35));
+            user-select: none;
+        }
+
+        .hng-bot-antenna {
+            position: absolute;
+            left: 42px;
+            top: 0;
+            width: 8px;
+            height: 16px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #00ffcc, #00b8ff);
+            box-shadow: 0 0 10px rgba(0,255,204,.8);
+        }
+
+        .hng-bot-antenna::before {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            left: -4px;
+            top: -9px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #fff 0 15%, #00ffcc 45%, #00b8ff 100%);
+            box-shadow: 0 0 14px rgba(0,255,204,.9);
+        }
+
+        .hng-bot-head {
+            position: absolute;
+            left: 7px;
+            top: 14px;
+            width: 78px;
+            height: 61px;
+            border-radius: 27px 27px 23px 23px;
+            background: linear-gradient(145deg, #ffffff, #dbeafe);
+            border: 2px solid #8eefff;
+            box-shadow: inset 0 -5px 12px rgba(0, 184, 255, .18), 0 0 12px rgba(0,255,204,.35);
+        }
+
+        .hng-bot-face {
+            position: absolute;
+            inset: 10px 8px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #07111f, #101c31);
+            border: 1px solid rgba(0,255,204,.55);
+            box-shadow: inset 0 0 14px rgba(0,255,204,.08);
+        }
+
+        .hng-bot-eye {
+            position: absolute;
+            top: 20px;
+            width: 9px;
+            height: 13px;
+            border-radius: 50%;
+            background: #00ffcc;
+            box-shadow: 0 0 8px #00ffcc;
+        }
+
+        .hng-bot-eye.left { left: 18px; }
+        .hng-bot-eye.right { right: 18px; }
+
+        .hng-bot-smile {
+            position: absolute;
+            left: 27px;
+            top: 34px;
+            width: 18px;
+            height: 9px;
+            border-bottom: 3px solid #00ffcc;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 8px rgba(0,255,204,.25);
+        }
+
+        .hng-bot-body {
+            position: absolute;
+            left: 18px;
+            top: 72px;
+            width: 56px;
+            height: 35px;
+            border-radius: 16px 16px 12px 12px;
+            background: linear-gradient(145deg, #ffffff, #dbeafe);
+            border: 2px solid #8eefff;
+            box-shadow: 0 0 10px rgba(0,184,255,.2);
+        }
+
+        .hng-bot-logo {
+            position: absolute;
+            left: 50%;
+            top: 10px;
+            transform: translateX(-50%);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 900;
+            color: #078fc5;
+            letter-spacing: .5px;
+        }
+
+        .hng-bot-arm {
+            position: absolute;
+            top: 79px;
+            width: 9px;
+            height: 26px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #dbeafe, #8eefff);
+            border: 1px solid #65dfff;
+        }
+
+        .hng-bot-arm.left { left: 10px; transform: rotate(18deg); }
+        .hng-bot-arm.right { right: 10px; transform: rotate(-18deg); }
+
+        .hng-bot-bubble {
+            position: relative;
+            min-width: 160px;
+            max-width: 220px;
+            margin-bottom: 12px;
+            padding: 10px 13px;
+            border-radius: 18px;
+            background: rgba(255,255,255,.97);
+            color: #182033;
+            font-size: 12px;
+            line-height: 1.4;
+            font-weight: 800;
+            box-shadow: 0 7px 22px rgba(0,0,0,.28), 0 0 18px rgba(0,255,204,.18);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            isolation: isolate;
+            animation: hngBubbleIn .45s cubic-bezier(.2,.9,.2,1);
+            pointer-events: none;
+        }
+
+        .hng-bot-bubble::before {
+            content: "";
+            position: absolute;
+            inset: -3px;
+            z-index: -1;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #ff3b8d, #ffb347, #ffe66d, #5dff9a, #38d9ff, #7d6bff, #ff63d8, #ff3b8d);
+            background-size: 250% 100%;
+            animation: hngRainbow 4s linear infinite;
+        }
+
+        .hng-bot-bubble::after {
+            content: "";
+            position: absolute;
+            left: -9px;
+            bottom: 15px;
+            width: 17px;
+            height: 17px;
+            background: #fff;
+            transform: rotate(45deg);
+            border-left: 3px solid #ff3b8d;
+            border-bottom: 3px solid #7d6bff;
+            border-radius: 2px 0 0 0;
+        }
+
+        body.light-mode .hng-bot-bubble {
+            background: rgba(255,255,255,.98);
+            color: #1e293b;
+        }
+
+        @keyframes hngBotFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-4px) rotate(-1deg); }
+        }
+
+        @keyframes hngBubbleIn {
+            from { opacity: 0; transform: translateX(-10px) scale(.92); }
+            to { opacity: 1; transform: translateX(0) scale(1); }
+        }
+
+        @keyframes hngRainbow {
+            to { background-position: 250% 0; }
+        }
+
+        .hng-bot-character.hng-run-right {
+            animation: hngRunRight .42s ease-in-out;
+        }
+
+        .hng-bot-character.hng-run-left {
+            animation: hngRunLeft .42s ease-in-out;
+        }
+
+        @keyframes hngRunRight {
+            0% { transform: translateX(0) rotate(0); }
+            45% { transform: translateX(35px) rotate(5deg); }
+            100% { transform: translateX(0) rotate(0); }
+        }
+
+        @keyframes hngRunLeft {
+            0% { transform: translateX(0) rotate(0); }
+            45% { transform: translateX(-35px) rotate(-5deg); }
+            100% { transform: translateX(0) rotate(0); }
+        }
+
+        @media (max-width: 768px) {
+            #hngBot {
+                top: 12px;
+                left: 10px;
+                width: 155px;
+                transform: scale(.82);
+                transform-origin: top left;
+            }
+            .hng-bot-bubble {
+                min-width: 145px;
+                max-width: 175px;
+                font-size: 11px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hng-bot-character,
+            .hng-bot-bubble,
+            .hng-bot-bubble::before {
+                animation: none !important;
+            }
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- ===== HNG BOT ===== -->
+    <div id="hngBot" aria-label="HNG Bot">
+        <div class="hng-bot-character" id="hngBotCharacter">
+            <div class="hng-bot-antenna"></div>
+            <div class="hng-bot-head">
+                <div class="hng-bot-face">
+                    <span class="hng-bot-eye left"></span>
+                    <span class="hng-bot-eye right"></span>
+                    <span class="hng-bot-smile"></span>
+                </div>
+            </div>
+            <div class="hng-bot-body">
+                <span class="hng-bot-logo">HNG</span>
+            </div>
+            <div class="hng-bot-arm left"></div>
+            <div class="hng-bot-arm right"></div>
+        </div>
+        <div class="hng-bot-bubble" id="hngBotBubble">
+            Xin chào! Hãy học tập và vươn lên nhé! 🚀
+        </div>
+    </div>
+
 
     <!-- ===== THEME TOGGLE BUTTON ===== -->
     <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
@@ -1009,6 +1272,78 @@
         }
 
         filterVideos();
+
+
+        // ===== HNG BOT =====
+        const hngBotMessages = [
+            "Xin chào! Hãy học tập và vươn lên nhé! 🚀",
+            "Hôm nay bạn định chinh phục kiến thức gì đây? 📚",
+            "Cố lên! Bạn đang tiến bộ từng ngày! ⭐",
+            "Một chút kiến thức hôm nay, một bước tiến ngày mai! 💪",
+            "Đừng bỏ cuộc nhé, kiến thức cần thời gian! 🌈",
+            "Chào mừng bạn đến với HNG ACADEMY! 🎓",
+            "Học một chút mỗi ngày, bạn sẽ đi rất xa! 🚀",
+            "Nào, cùng bắt đầu một bài học thôi! 🤖✨",
+            "Bạn làm được mà! HNG Bot tin bạn! 💙",
+            "Kiến thức là sức mạnh. Tiến lên nào! ⚡",
+            "Hôm nay học tốt, ngày mai tự tin hơn! 🌟",
+            "Mở một bài học và khám phá điều mới nhé! 📖"
+        ];
+
+        const hngBot = document.getElementById('hngBot');
+        const hngBotCharacter = document.getElementById('hngBotCharacter');
+        const hngBotBubble = document.getElementById('hngBotBubble');
+        let hngBotMessageIndex = 0;
+        let hngBotLastEscape = 0;
+
+        function changeHngBotMessage() {
+            let nextIndex = Math.floor(Math.random() * hngBotMessages.length);
+            if (hngBotMessages.length > 1 && nextIndex === hngBotMessageIndex) {
+                nextIndex = (nextIndex + 1) % hngBotMessages.length;
+            }
+            hngBotMessageIndex = nextIndex;
+            hngBotBubble.style.animation = 'none';
+            void hngBotBubble.offsetWidth;
+            hngBotBubble.textContent = hngBotMessages[nextIndex];
+            hngBotBubble.style.animation = 'hngBubbleIn .45s cubic-bezier(.2,.9,.2,1)';
+        }
+
+        setInterval(changeHngBotMessage, 15000);
+
+        // Né chuột: chỉ kích hoạt khi con trỏ thực sự tới gần robot,
+        // và giới hạn tần suất để không gây khó chịu.
+        document.addEventListener('mousemove', function(e) {
+            const now = Date.now();
+            if (now - hngBotLastEscape < 850) return;
+
+            const rect = hngBotCharacter.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const distance = Math.hypot(e.clientX - cx, e.clientY - cy);
+
+            if (distance < 105) {
+                hngBotLastEscape = now;
+
+                const moveRight = e.clientX < cx;
+                hngBotCharacter.classList.remove('hng-run-right', 'hng-run-left');
+                void hngBotCharacter.offsetWidth;
+                hngBotCharacter.classList.add(moveRight ? 'hng-run-right' : 'hng-run-left');
+
+                // Đổi câu ngắn khi bị "đuổi" để tăng độ cute.
+                const escapeMessages = [
+                    "Ê ê, đừng bắt tuiii! 😂",
+                    "Haha, bắt được tui đi! 🤖💨",
+                    "Né một chút thôi nha! 😆",
+                    "Aaaa! Chuột tới kìa! 🏃‍♂️💨"
+                ];
+                hngBotBubble.textContent =
+                    escapeMessages[Math.floor(Math.random() * escapeMessages.length)];
+
+                setTimeout(() => {
+                    hngBotBubble.textContent = hngBotMessages[hngBotMessageIndex];
+                }, 1700);
+            }
+        });
     </script>
 </body>
 </html>
