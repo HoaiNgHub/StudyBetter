@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG ACADEMY | Hướng Dẫn & Giải Bài Tập Excel 2019</title>
-    <!-- Fonts Gaming / Modern -->
+    <title>HNG ACADEMY | Kho Video & Giải Đề Excel 2019</title>
+    <!-- Fonts Gaming / Cyberpunk -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -35,10 +35,7 @@
         /* Canvas Nền Ngân Hà & Ngôi Sao Lóng Lánh */
         #particle-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none;
             z-index: 0;
         }
@@ -55,7 +52,6 @@
         }
         .glow-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: var(--secondary-neon); }
         .glow-2 { bottom: -10%; right: -10%; width: 600px; height: 600px; background: var(--primary-neon); }
-        .glow-3 { top: 40%; left: 35%; width: 400px; height: 400px; background: var(--accent-purple); }
 
         @keyframes floatGlow {
             0% { transform: scale(1) translate(0, 0); }
@@ -157,14 +153,14 @@
             transform: translateY(-2px);
         }
 
-        /* Lưới Card Video */
+        /* Lưới Card Album/Playlist */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 28px;
         }
 
-        /* Card Video Lung Linh */
+        /* Thẻ Album Gọn Gàng */
         .video-card {
             background: var(--card-bg);
             border-radius: 18px;
@@ -175,44 +171,26 @@
             flex-direction: column;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-        }
-
-        .video-card::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 20px;
-            background: linear-gradient(45deg, var(--primary-neon), transparent, var(--secondary-neon));
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            cursor: pointer;
         }
 
         .video-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 15px 35px rgba(0, 255, 204, 0.25);
+            border-color: var(--primary-neon);
         }
 
-        .video-card:hover::before {
-            opacity: 1;
-        }
-
-        /* Ảnh Thumbnail Video */
         .thumb-box {
             position: relative;
             width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%;
             overflow: hidden;
             background: #000;
-            cursor: pointer;
         }
 
         .thumb-box img {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
@@ -221,59 +199,36 @@
             transform: scale(1.1);
         }
 
-        .play-btn-overlay {
+        /* Tag Số Lượng Video trong Album */
+        .playlist-count-badge {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            width: 60px;
-            height: 60px;
-            background: rgba(0, 255, 204, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .play-btn-overlay::after {
-            content: '';
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 10px 0 10px 18px;
-            border-color: transparent transparent transparent #000;
-            margin-left: 4px;
-        }
-
-        .video-card:hover .play-btn-overlay {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
+            bottom: 10px; right: 10px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid var(--primary-neon);
+            color: var(--primary-neon);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
         }
 
         .badge-cat {
             position: absolute;
-            top: 12px;
-            left: 12px;
-            background: rgba(3, 7, 18, 0.8);
+            top: 12px; left: 12px;
+            background: rgba(3, 7, 18, 0.85);
             border: 1px solid var(--primary-neon);
             color: var(--primary-neon);
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 700;
-            backdrop-filter: blur(5px);
         }
 
-        /* Card Content */
         .card-body {
             padding: 20px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-            justify-content: space-between;
         }
 
         .video-title {
@@ -291,55 +246,29 @@
             line-height: 1.5;
         }
 
-        .card-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: auto;
-        }
-
-        .btn-watch {
-            flex: 1;
-            padding: 10px;
+        .btn-open-album {
+            width: 100%;
+            padding: 12px;
             text-align: center;
             background: linear-gradient(135deg, #00ffcc, #00b8ff);
             color: #000;
             font-weight: 800;
             border-radius: 8px;
-            text-decoration: none;
+            border: none;
+            cursor: pointer;
             box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .btn-watch:hover {
+        .btn-open-album:hover {
             box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
         }
 
-        .btn-doc {
-            padding: 10px 14px;
-            background: rgba(255, 0, 127, 0.2);
-            border: 1px solid var(--secondary-neon);
-            color: var(--secondary-neon);
-            font-weight: 700;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .btn-doc:hover {
-            background: var(--secondary-neon);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
-        }
-
-        /* MODAL PHÁT VIDEO YOUTUBE */
+        /* MODAL YOUTUBE PLAYLIST CHUYÊN NGHIỆP */
         .modal-player {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.93);
             backdrop-filter: blur(15px);
             display: none;
             justify-content: center;
@@ -348,167 +277,301 @@
             padding: 20px;
         }
 
-        .player-box {
+        .playlist-layout {
             width: 100%;
-            max-width: 900px;
+            max-width: 1100px;
+            height: 85vh;
             background: #090d16;
             border: 1px solid var(--primary-neon);
             border-radius: 16px;
-            padding: 15px;
-            box-shadow: 0 0 40px rgba(0, 255, 204, 0.5);
-            position: relative;
-        }
-
-        .iframe-container {
-            position: relative;
-            padding-top: 56.25%;
-            height: 0;
-            border-radius: 10px;
+            display: flex;
             overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 255, 204, 0.3);
+            position: relative;
         }
 
-        .iframe-container iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: none;
+        /* Khung bên trái: Màn hình Video */
+        .main-video-area {
+            flex: 2.2;
+            display: flex;
+            flex-direction: column;
+            background: #000;
         }
 
-        .close-modal {
+        .video-frame-container {
+            width: 100%;
+            height: 70%;
+            background: #000;
+        }
+
+        .video-frame-container iframe {
+            width: 100%; height: 100%; border: none;
+        }
+
+        .video-meta-box {
+            padding: 20px;
+            background: #0d1322;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .playing-title {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .btn-download-file {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ff007f, #9d4edd);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            width: fit-content;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-download-file:hover {
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* Khung bên phải: Danh sách bài hát/video (Playlist) */
+        .playlist-sidebar {
+            flex: 1;
+            background: #0f172a;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .playlist-header {
+            padding: 16px;
+            background: #1e293b;
+            color: var(--primary-neon);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .playlist-items-list {
+            overflow-y: auto;
+            flex-grow: 1;
+            padding: 10px;
+        }
+
+        .playlist-item {
+            display: flex;
+            gap: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .playlist-item:hover, .playlist-item.active {
+            background: rgba(0, 255, 204, 0.15);
+            border-left: 4px solid var(--primary-neon);
+        }
+
+        .playlist-item img {
+            width: 80px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .playlist-item-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .playlist-item-title {
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .playlist-item-duration {
+            color: var(--text-sub);
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+
+        .close-modal-btn {
             position: absolute;
-            top: -45px;
-            right: 0;
+            top: 15px; right: 20px;
             color: #fff;
             font-size: 2rem;
             cursor: pointer;
-            font-weight: bold;
+            z-index: 1001;
+        }
+
+        /* Reponsive Mobile */
+        @media (max-width: 768px) {
+            .playlist-layout { flex-direction: column; height: 90vh; }
+            .main-video-area { height: 50%; }
+            .playlist-sidebar { height: 50%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Dynamic Background Elements -->
+    <!-- Dynamic Background -->
     <div class="glow-sphere glow-1"></div>
     <div class="glow-sphere glow-2"></div>
-    <div class="glow-sphere glow-3"></div>
     <canvas id="particle-canvas"></canvas>
 
     <div class="layout-wrapper">
-        <!-- Header Section -->
         <header>
             <h1 class="brand-title">HNG ACADEMY</h1>
-            <p class="brand-subtitle">Kho Video Hướng Dẫn Học Tập & Giải Bài Tập Excel Miễn Phí</p>
+            <p class="brand-subtitle">Trọn Bộ Video Giải Đề Excel 2019 & Mẹo Học Tập</p>
         </header>
 
-        <!-- Filter & Search Section -->
+        <!-- Filter & Search -->
         <div class="filter-section">
             <div class="search-box">
-                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm bài giải Excel, hàm VLOOKUP, IF, PivotTable..." onkeyup="filterVideos()">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm đề thi Excel, VLOOKUP, PivotTable..." onkeyup="filterVideos()">
             </div>
             <div class="category-tabs">
                 <button class="tab-btn active" onclick="filterCategory('excel2019', this)">📊 Giải EXCEL 2019</button>
                 <button class="tab-btn" onclick="filterCategory('all', this)">Tất Cả</button>
                 <button class="tab-btn" onclick="filterCategory('study', this)">Mẹo Học Tập</button>
                 <button class="tab-btn" onclick="filterCategory('code', this)">Lập Trình & Web</button>
-                <button class="tab-btn" onclick="filterCategory('ai', this)">Công Cụ AI</button>
-                <button class="tab-btn" onclick="filterCategory('pc', this)">Thủ Thuật Máy Tính</button>
             </div>
         </div>
 
-        <!-- Video Grid Container -->
+        <!-- Danh sách Các Mục Lớn (Album Đề Thi) -->
         <div class="video-grid" id="videoContainer">
 
-            <!-- BÀI HỌC EXCEL 1 -->
-            <div class="video-card" data-category="excel2019" data-title="giải bài tập excel 2019 cơ bản đến nâng cao hàm vlookup hlookup if">
-                <div class="thumb-box" onclick="openPlayer('VsbCyOtNt7s')">
+            <!-- MỤC LỚN 1: BỘ ĐỀ THI EXCEL 2019 CƠ BẢN TỚI NÂNG CAO -->
+            <div class="video-card" data-category="excel2019" data-title="trọn bộ 10 đề thi excel 2019 vlookup if sumif countif" onclick="openPlaylist(0)">
+                <div class="thumb-box">
                     <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
                     <div class="badge-cat">Giải EXCEL 2019</div>
-                    <div class="play-btn-overlay"></div>
+                    <div class="playlist-count-badge">📑 5 Video Bài Giải</div>
                 </div>
                 <div class="card-body">
-                    <h3 class="video-title">Giải Bài Tập Excel 2019: Kết Hợp Hàm IF & VLOOKUP</h3>
-                    <p class="video-desc">Hướng dẫn chi tiết cách tính bảng lương, thưởng và tra cứu dữ liệu cực nhanh trong Excel 2019.</p>
-                    <div class="card-actions">
-                        <a class="btn-watch" onclick="openPlayer('VsbCyOtNt7s')">Xem Bài Giải</a>
-                        <a class="btn-doc" href="https://drive.google.com" target="_blank">Tải File Excel</a>
-                    </div>
+                    <h3 class="video-title">Trọn Bộ Đề Thi Thực Hành Excel 2019 (Có File Tải)</h3>
+                    <p class="video-desc">Danh sách video giải chi tiết từng câu hỏi trong đề thi Tin Học Văn Phòng 2019.</p>
+                    <button class="btn-open-album">▶ Mở Danh Sách Video</button>
                 </div>
             </div>
 
-            <!-- BÀI HỌC EXCEL 2 -->
-            <div class="video-card" data-category="excel2019" data-title="hướng dẫn tạo pivottable báo cáo tự động excel 2019">
-                <div class="thumb-box" onclick="openPlayer('VsbCyOtNt7s')">
+            <!-- MỤC LỚN 2: CHUYÊN ĐỀ HÀM TRA CỨU EXCEL -->
+            <div class="video-card" data-category="excel2019" data-title="chuyên đề hàm vlookup hlookup index match excel 2019" onclick="openPlaylist(1)">
+                <div class="thumb-box">
                     <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
                     <div class="badge-cat">Giải EXCEL 2019</div>
-                    <div class="play-btn-overlay"></div>
+                    <div class="playlist-count-badge">📑 3 Video Bài Giải</div>
                 </div>
                 <div class="card-body">
-                    <h3 class="video-title">Tạo Báo Cáo Tự Động Với PivotTable Trong Excel 2019</h3>
-                    <p class="video-desc">Cách tổng hợp dữ liệu doanh thu, bán hàng siêu dễ chỉ với vài cú click chuột.</p>
-                    <div class="card-actions">
-                        <a class="btn-watch" onclick="openPlayer('VsbCyOtNt7s')">Xem Bài Giải</a>
-                        <a class="btn-doc" href="https://drive.google.com" target="_blank">Tải File Excel</a>
-                    </div>
+                    <h3 class="video-title">Chuyên Đề: Làm Chủ Hàm VLOOKUP & INDEX MATCH</h3>
+                    <p class="video-desc">Chuỗi bài giảng từ cơ bản đến nâng cao về các hàm tìm kiếm tra cứu dữ liệu.</p>
+                    <button class="btn-open-album">▶ Mở Danh Sách Video</button>
                 </div>
             </div>
 
-            <!-- BÀI HỌC EXCEL 3 -->
-            <div class="video-card" data-category="excel2019" data-title="giải đề thi tin học văn phòng excel 2019 tổng hợp sumif countif">
-                <div class="thumb-box" onclick="openPlayer('VsbCyOtNt7s')">
+            <!-- MỤC LỚN 3: BÀI BẢO CÁO PIVOTTABLE -->
+            <div class="video-card" data-category="excel2019" data-title="tạo báo cáo pivottable tự động excel 2019" onclick="openPlaylist(2)">
+                <div class="thumb-box">
                     <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
                     <div class="badge-cat">Giải EXCEL 2019</div>
-                    <div class="play-btn-overlay"></div>
+                    <div class="playlist-count-badge">📑 2 Video Bài Giải</div>
                 </div>
                 <div class="card-body">
-                    <h3 class="video-title">Giải Đề Thi Thực Hành Excel 2019 (Hàm SUMIF & COUNTIF)</h3>
-                    <p class="video-desc">Tổng hợp các dạng bài tập thực tế hay xuất hiện trong các đề thi chứng chỉ tin học văn phòng.</p>
-                    <div class="card-actions">
-                        <a class="btn-watch" onclick="openPlayer('VsbCyOtNt7s')">Xem Bài Giải</a>
-                        <a class="btn-doc" href="https://drive.google.com" target="_blank">Tải Đề Bài</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- BÀI HỌC KHÁC: MẸO HỌC TẬP -->
-            <div class="video-card" data-category="study" data-title="cách quản lý thời gian học tập hiệu quả">
-                <div class="thumb-box" onclick="openPlayer('VsbCyOtNt7s')">
-                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
-                    <div class="badge-cat">Mẹo Học Tập</div>
-                    <div class="play-btn-overlay"></div>
-                </div>
-                <div class="card-body">
-                    <h3 class="video-title">Phương Pháp Học Tập Pomodoro Giúp Tập Trung 200%</h3>
-                    <p class="video-desc">Hướng dẫn cách chia nhỏ thời gian học giúp ghi nhớ lâu và không bị mệt mỏi.</p>
-                    <div class="card-actions">
-                        <a class="btn-watch" onclick="openPlayer('VsbCyOtNt7s')">Xem Bài Học</a>
-                        <a class="btn-doc" href="https://drive.google.com" target="_blank">Tài Liệu</a>
-                    </div>
+                    <h3 class="video-title">Báo Cáo Doanh Thu Tự Động Với PivotTable Excel</h3>
+                    <p class="video-desc">Hướng dẫn xử lý dữ liệu lớn và vẽ biểu đồ báo cáo chuyên nghiệp.</p>
+                    <button class="btn-open-album">▶ Mở Danh Sách Video</button>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- MODAL PHÁT VIDEO -->
-    <div class="modal-player" id="videoModal">
-        <div class="player-box">
-            <span class="close-modal" onclick="closePlayer()">&times;</span>
-            <div class="iframe-container">
-                <iframe id="youtubeIframe" src="" allowfullscreen></iframe>
+    <!-- MODAL GIAO DIỆN XEM PLAYLIST YOUTUBE -->
+    <div class="modal-player" id="playlistModal">
+        <span class="close-modal-btn" onclick="closePlaylist()">&times;</span>
+        <div class="playlist-layout">
+            
+            <!-- Bên trái: Màn hình phát video -->
+            <div class="main-video-area">
+                <div class="video-frame-container">
+                    <iframe id="mainIframe" src="" allowfullscreen></iframe>
+                </div>
+                <div class="video-meta-box">
+                    <h4 class="playing-title" id="currentVideoTitle">Tên Bài Học Đang Phát</h4>
+                    <a class="btn-download-file" id="currentFileBtn" href="#" target="_blank">
+                        📥 TẢI FILE EXCEL / ĐỀ BÀI (DRIVE)
+                    </a>
+                </div>
             </div>
+
+            <!-- Bên phải: Danh sách video thuộc Album -->
+            <div class="playlist-sidebar">
+                <div class="playlist-header" id="playlistHeaderTitle">DANH SÁCH BÀI GIẢI</div>
+                <div class="playlist-items-list" id="playlistItemsContainer">
+                    <!-- Danh sách video con sẽ tự động load bằng JS tại đây -->
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script>
-        /* === HIỆU ỨNG CANVAS NGÂN HÀ LÓNG LÁNH === */
+        /* DỮ LIỆU CÁC MỤC LỚN VÀ VIDEO CON TƯƠNG ỨNG */
+        const albumsData = [
+            {
+                albumTitle: "Trọn Bộ Đề Thi Thực Hành Excel 2019",
+                fileUrl: "https://drive.google.com", // Link tải chung cho bộ đề này
+                videos: [
+                    { title: "Bài 1: Giải Câu 1 & 2 - Dùng Hàm IF & VLOOKUP", youtubeId: "VsbCyOtNt7s", duration: "10:15" },
+                    { title: "Bài 2: Giải Câu 3 - Tính Bảng Lương & Thưởng", youtubeId: "VsbCyOtNt7s", duration: "08:40" },
+                    { title: "Bài 3: Giải Câu 4 - Thống Kê Bằng Hàm SUMIF", youtubeId: "VsbCyOtNt7s", duration: "12:05" },
+                    { title: "Bài 4: Giải Câu 5 - Đếm Dữ Liệu Với COUNTIF", youtubeId: "VsbCyOtNt7s", duration: "06:30" },
+                    { title: "Bài 5: Tổng Kết & Mẹo Điểm Tối Đa Khi Thi", youtubeId: "VsbCyOtNt7s", duration: "15:20" }
+                ]
+            },
+            {
+                albumTitle: "Chuyên Đề Hàm VLOOKUP & INDEX MATCH",
+                fileUrl: "https://drive.google.com",
+                videos: [
+                    { title: "Bài 1: VLOOKUP Cơ Bản Cho Người Mới Bắt Đầu", youtubeId: "VsbCyOtNt7s", duration: "09:10" },
+                    { title: "Bài 2: VLOOKUP Nâng Cao Kết Hợp Hàm IF", youtubeId: "VsbCyOtNt7s", duration: "14:25" },
+                    { title: "Bài 3: Thay Thế VLOOKUP Bằng INDEX & MATCH", youtubeId: "VsbCyOtNt7s", duration: "11:50" }
+                ]
+            },
+            {
+                albumTitle: "Báo Cáo Doanh Thu Tự Động Với PivotTable",
+                fileUrl: "https://drive.google.com",
+                videos: [
+                    { title: "Bài 1: Cách Tạo PivotTable Báo Cáo Nhanh", youtubeId: "VsbCyOtNt7s", duration: "07:45" },
+                    { title: "Bài 2: Vẽ Biểu Đồ Động Với PivotChart", youtubeId: "VsbCyOtNt7s", duration: "13:10" }
+                ]
+            }
+        ];
+
+        /* HIỆU ỨNG NỀN CANVAS NGÂN HÀ */
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-
         function initCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             particles = [];
-            for (let i = 0; i < 120; i++) {
+            for (let i = 0; i < 100; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
@@ -520,7 +583,6 @@
                 });
             }
         }
-
         function drawParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => {
@@ -528,30 +590,73 @@
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                 ctx.fillStyle = p.glow;
                 ctx.globalAlpha = p.alpha;
-                ctx.shadowBlur = 12;
+                ctx.shadowBlur = 10;
                 ctx.shadowColor = p.glow;
                 ctx.fill();
-
-                p.x += p.speedX;
-                p.y += p.speedY;
-                p.alpha += (Math.random() - 0.5) * 0.02;
-
-                if (p.alpha < 0.1) p.alpha = 0.1;
-                if (p.alpha > 1) p.alpha = 1;
-
+                p.x += p.speedX; p.y += p.speedY;
                 if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
                 if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
             });
             requestAnimationFrame(drawParticles);
         }
-
         window.addEventListener('resize', initCanvas);
-        initCanvas();
-        drawParticles();
+        initCanvas(); drawParticles();
 
-        /* === BỘ LỌC TÌM KIẾM & CATEGORY === */
-        let activeCategory = 'excel2019'; // Mặc định hiển thị mục Giải EXCEL 2019
+        /* MỞ VÀ XỬ LÝ PLAYLIST MODAL */
+        let currentAlbumIndex = 0;
 
+        function openPlaylist(albumIdx) {
+            currentAlbumIndex = albumIdx;
+            const album = albumsData[albumIdx];
+
+            document.getElementById('playlistHeaderTitle').innerText = album.albumTitle.toUpperCase();
+            document.getElementById('currentFileBtn').href = album.fileUrl;
+
+            // Render danh sách video con
+            const container = document.getElementById('playlistItemsContainer');
+            container.innerHTML = '';
+
+            album.videos.forEach((vid, vIdx) => {
+                const item = document.createElement('div');
+                item.className = `playlist-item ${vIdx === 0 ? 'active' : ''}`;
+                item.onclick = () => selectVideo(vIdx);
+                item.innerHTML = `
+                    <img src="https://img.youtube.com/vi/${vid.youtubeId}/hqdefault.jpg" alt="thumb">
+                    <div class="playlist-item-info">
+                        <div class="playlist-item-title">${vid.title}</div>
+                        <div class="playlist-item-duration">⏱ ${vid.duration}</div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+
+            // Mặc định phát video đầu tiên
+            selectVideo(0);
+            document.getElementById('playlistModal').style.display = 'flex';
+        }
+
+        function selectVideo(videoIdx) {
+            const album = albumsData[currentAlbumIndex];
+            const vid = album.videos[videoIdx];
+
+            document.getElementById('mainIframe').src = `https://www.youtube.com/embed/${vid.youtubeId}?autoplay=1`;
+            document.getElementById('currentVideoTitle').innerText = vid.title;
+
+            // Đổi class Active cho item được chọn
+            const items = document.querySelectorAll('.playlist-item');
+            items.forEach((item, idx) => {
+                if (idx === videoIdx) item.classList.add('active');
+                else item.classList.remove('active');
+            });
+        }
+
+        function closePlaylist() {
+            document.getElementById('mainIframe').src = '';
+            document.getElementById('playlistModal').style.display = 'none';
+        }
+
+        /* BỘ LỌC CATEGORY & TÌM KIẾM */
+        let activeCategory = 'excel2019';
         function filterCategory(cat, btn) {
             activeCategory = cat;
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -570,26 +675,10 @@
                 const matchesCat = (activeCategory === 'all' || cat === activeCategory);
                 const matchesQuery = title.includes(query);
 
-                if (matchesCat && matchesQuery) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = (matchesCat && matchesQuery) ? 'flex' : 'none';
             });
         }
 
-        /* === YOUTUBE PLAYER MODAL === */
-        function openPlayer(videoId) {
-            document.getElementById('youtubeIframe').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-            document.getElementById('videoModal').style.display = 'flex';
-        }
-
-        function closePlayer() {
-            document.getElementById('youtubeIframe').src = '';
-            document.getElementById('videoModal').style.display = 'none';
-        }
-
-        // Chạy bộ lọc ban đầu để ưu tiên danh mục Giải EXCEL 2019
         filterVideos();
     </script>
 </body>
