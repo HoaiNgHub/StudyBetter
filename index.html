@@ -425,7 +425,6 @@
             z-index: 1001;
         }
 
-        /* Reponsive Mobile */
         @media (max-width: 768px) {
             .playlist-layout { flex-direction: column; height: 90vh; }
             .main-video-area { height: 50%; }
@@ -463,11 +462,10 @@
         <!-- Danh sách Các Mục Lớn -->
         <div class="video-grid" id="videoContainer">
 
-            <!-- MỤC LỚN 1: BỘ BÀI GIẢI EXCEL 2019 VÀ FILE ĐỀ -->
+            <!-- MỤC LỚN 1: EXCEL 2019 -->
             <div class="video-card" data-category="excel2019" data-title="bộ bài giải excel 2019 và file đề" onclick="openPlaylist(0)">
                 <div class="thumb-box">
-                    <!-- LINK ẢNH TRỰC TIẾP EXCEL -->
-                    <img src="https://i.imgur.com/eB3YxJd.jpeg" alt="MOS EXCEL 2019 EXAM 1 - PROJECT 1">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&auto=format&fit=crop" alt="Excel 2019">
                     <div class="badge-cat">Giải EXCEL 2019</div>
                     <div class="playlist-count-badge">📑 5 Video Bài Giải</div>
                 </div>
@@ -478,11 +476,10 @@
                 </div>
             </div>
 
-            <!-- MỤC LỚN 2: BỘ BÀI GIẢI WORD 2019 VÀ FILE ĐỀ -->
+            <!-- MỤC LỚN 2: WORD 2019 -->
             <div class="video-card" data-category="word2019" data-title="bộ bài giải word 2019 và file đề" onclick="openPlaylist(1)">
                 <div class="thumb-box">
-                    <!-- LINK ẢNH TRỰC TIẾP WORD -->
-                    <img src="https://i.imgur.com/8QzQYw7.jpeg" alt="MOS WORD 2019 EXAM 1 - PROJECT 1">
+                    <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&auto=format&fit=crop" alt="Word 2019">
                     <div class="badge-cat badge-word">Giải WORD 2019</div>
                     <div class="playlist-count-badge">📑 4 Video Bài Giải</div>
                 </div>
@@ -496,12 +493,11 @@
         </div>
     </div>
 
-    <!-- MODAL GIAO DIỆN XEM PLAYLIST YOUTUBE -->
+    <!-- MODAL PLAYLIST YOUTUBE -->
     <div class="modal-player" id="playlistModal">
         <span class="close-modal-btn" onclick="closePlaylist()">&times;</span>
         <div class="playlist-layout">
             
-            <!-- Bên trái: Màn hình phát video -->
             <div class="main-video-area">
                 <div class="video-frame-container">
                     <iframe id="mainIframe" src="" allowfullscreen></iframe>
@@ -514,44 +510,40 @@
                 </div>
             </div>
 
-            <!-- Bên phải: Danh sách video thuộc Album -->
             <div class="playlist-sidebar">
                 <div class="playlist-header" id="playlistHeaderTitle">DANH SÁCH BÀI GIẢI</div>
-                <div class="playlist-items-list" id="playlistItemsContainer">
-                    <!-- Danh sách video con load bằng JS -->
-                </div>
+                <div class="playlist-items-list" id="playlistItemsContainer"></div>
             </div>
 
         </div>
     </div>
 
     <script>
-        /* DỮ LIỆU CÁC MỤC LỚN VÀ VIDEO CON TƯƠNG ỨNG */
         const albumsData = [
             {
                 albumTitle: "Bộ Bài Giải EXCEL 2019 và FILE Đề",
                 fileUrl: "https://drive.google.com",
                 videos: [
-                    { title: "MOS EXCEL 2019: EXAM 1 - PROJECT 1", youtubeId: "VsbCyOtNt7s", duration: "10:15", thumb: "https://i.imgur.com/eB3YxJd.jpeg" },
-                    { title: "Bài 2: Giải Câu 3 - Tính Bảng Lương & Thưởng", youtubeId: "VsbCyOtNt7s", duration: "08:40", thumb: "https://i.imgur.com/eB3YxJd.jpeg" },
-                    { title: "Bài 3: Giải Câu 4 - Thống Kê Bằng Hàm SUMIF", youtubeId: "VsbCyOtNt7s", duration: "12:05", thumb: "https://i.imgur.com/eB3YxJd.jpeg" },
-                    { title: "Bài 4: Giải Câu 5 - Đếm Dữ Liệu Với COUNTIF", youtubeId: "VsbCyOtNt7s", duration: "06:30", thumb: "https://i.imgur.com/eB3YxJd.jpeg" },
-                    { title: "Bài 5: Tổng Kết & Mẹo Điểm Tối Đa Khi Thi", youtubeId: "VsbCyOtNt7s", duration: "15:20", thumb: "https://i.imgur.com/eB3YxJd.jpeg" }
+                    { title: "MOS EXCEL 2019: EXAM 1 - PROJECT 1", youtubeId: "VsbCyOtNt7s", duration: "10:15" },
+                    { title: "Bài 2: Giải Câu 3 - Tính Bảng Lương & Thưởng", youtubeId: "VsbCyOtNt7s", duration: "08:40" },
+                    { title: "Bài 3: Giải Câu 4 - Thống Kê Bằng Hàm SUMIF", youtubeId: "VsbCyOtNt7s", duration: "12:05" },
+                    { title: "Bài 4: Giải Câu 5 - Đếm Dữ Liệu Với COUNTIF", youtubeId: "VsbCyOtNt7s", duration: "06:30" },
+                    { title: "Bài 5: Tổng Kết & Mẹo Điểm Tối Đa Khi Thi", youtubeId: "VsbCyOtNt7s", duration: "15:20" }
                 ]
             },
             {
                 albumTitle: "Bộ Bài Giải Word 2019 và FILE Đề",
                 fileUrl: "https://drive.google.com",
                 videos: [
-                    { title: "MOS WORD 2019: EXAM 1 - PROJECT 1", youtubeId: "VsbCyOtNt7s", duration: "09:30", thumb: "https://i.imgur.com/8QzQYw7.jpeg" },
-                    { title: "Bài 2: Chèn Bảng Table & Công Thức Tính", youtubeId: "VsbCyOtNt7s", duration: "11:15", thumb: "https://i.imgur.com/8QzQYw7.jpeg" },
-                    { title: "Bài 3: Tạo Mục Lục Tự Động Trong Word 2019", youtubeId: "VsbCyOtNt7s", duration: "07:45", thumb: "https://i.imgur.com/8QzQYw7.jpeg" },
-                    { title: "Bài 4: Trộn Thư Mail Merge Siêu Nhanh", youtubeId: "VsbCyOtNt7s", duration: "13:00", thumb: "https://i.imgur.com/8QzQYw7.jpeg" }
+                    { title: "MOS WORD 2019: EXAM 1 - PROJECT 1", youtubeId: "VsbCyOtNt7s", duration: "09:30" },
+                    { title: "Bài 2: Chèn Bảng Table & Công Thức Tính", youtubeId: "VsbCyOtNt7s", duration: "11:15" },
+                    { title: "Bài 3: Tạo Mục Lục Tự Động Trong Word 2019", youtubeId: "VsbCyOtNt7s", duration: "07:45" },
+                    { title: "Bài 4: Trộn Thư Mail Merge Siêu Nhanh", youtubeId: "VsbCyOtNt7s", duration: "13:00" }
                 ]
             }
         ];
 
-        /* HIỆU ỨNG NỀN CANVAS NGÂN HÀ */
+        /* CANVAS BACKGROUND */
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -590,7 +582,7 @@
         window.addEventListener('resize', initCanvas);
         initCanvas(); drawParticles();
 
-        /* MỞ VÀ XỬ LÝ PLAYLIST MODAL */
+        /* MODAL & PLAYLIST */
         let currentAlbumIndex = 0;
 
         function openPlaylist(albumIdx) {
@@ -600,16 +592,18 @@
             document.getElementById('playlistHeaderTitle').innerText = album.albumTitle.toUpperCase();
             document.getElementById('currentFileBtn').href = album.fileUrl;
 
-            // Render danh sách video con
             const container = document.getElementById('playlistItemsContainer');
             container.innerHTML = '';
 
             album.videos.forEach((vid, vIdx) => {
+                // Tự động lấy thumbnail chuẩn từ ID YouTube
+                const autoYtThumb = `https://img.youtube.com/vi/${vid.youtubeId}/mqdefault.jpg`;
+                
                 const item = document.createElement('div');
                 item.className = `playlist-item ${vIdx === 0 ? 'active' : ''}`;
                 item.onclick = () => selectVideo(vIdx);
                 item.innerHTML = `
-                    <img src="${vid.thumb}" alt="thumb">
+                    <img src="${autoYtThumb}" alt="thumb">
                     <div class="playlist-item-info">
                         <div class="playlist-item-title">${vid.title}</div>
                         <div class="playlist-item-duration">⏱ ${vid.duration}</div>
@@ -618,7 +612,6 @@
                 container.appendChild(item);
             });
 
-            // Mặc định phát video đầu tiên
             selectVideo(0);
             document.getElementById('playlistModal').style.display = 'flex';
         }
@@ -630,7 +623,6 @@
             document.getElementById('mainIframe').src = `https://www.youtube.com/embed/${vid.youtubeId}?autoplay=1`;
             document.getElementById('currentVideoTitle').innerText = vid.title;
 
-            // Đổi class Active cho item được chọn
             const items = document.querySelectorAll('.playlist-item');
             items.forEach((item, idx) => {
                 if (idx === videoIdx) item.classList.add('active');
@@ -643,7 +635,7 @@
             document.getElementById('playlistModal').style.display = 'none';
         }
 
-        /* BỘ LỌC CATEGORY & TÌM KIẾM */
+        /* FILTER */
         let activeCategory = 'all';
         function filterCategory(cat, btn) {
             activeCategory = cat;
