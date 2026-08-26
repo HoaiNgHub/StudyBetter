@@ -1413,7 +1413,8 @@
             <span class="close-feedback" onclick="closeFeedback()">&times;</span>
             <h2 class="feedback-title">GỬI Ý KIẾN</h2>
             <form id="feedbackForm">
-                <input type="hidden" name="access_key" value="b99a548e-7ae5-4031-9603-dd6af26ae6b2">
+                <!-- API Key đã được cập nhật vào đây -->
+                <input type="hidden" name="access_key" value="AQ.Ab8RN6JkKBkUM4DXpwfRnpMae54UKAOZ5HFmCxkwGpPTqs1vKA">
                 <input type="hidden" name="subject" value="HNG ACADEMY - Ý kiến đóng góp mới!">
 
                 <input type="text" name="Tên" class="fb-input" placeholder="Tên của bạn..." required>
@@ -1857,7 +1858,7 @@
 
                 const angle = Math.atan2(e.clientY - eyeCy, e.clientX - eyeCx);
                 const maxDistance = 4;
-                const distance = Math.min(maxDistance, Math.hypot(e.clientX - eyeCx, e.clientY - eyeCy) / 10);
+                const distance = Math.min(maxDistance, Math.hypot(e.clientX - eyeCx, e.clientY - eyeCx) / 10);
 
                 const eyeX = Math.cos(angle) * distance;
                 const eyeY = Math.sin(angle) * distance;
