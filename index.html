@@ -120,7 +120,7 @@
         .glow-2 { bottom: -10%; right: -10%; width: 600px; height: 600px; background: var(--primary-neon); }
 
         body.light-mode .glow-sphere {
-            opacity: 0.1;
+            opacity: 0.08;
         }
 
         @keyframes floatGlow {
@@ -156,10 +156,9 @@
         }
 
         body.light-mode .brand-title {
-            color: #06B6D4;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
-            background: unset;
+            background: linear-gradient(135deg, #06B6D4 0%, #A78BFA 50%, #FF6B6B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
             font-weight: 900;
         }
@@ -172,7 +171,7 @@
             transition: color 0.6s ease;
         }
 
-        /* Hiệu ứng chữ vàng kim lấp lánh */
+        /* ===== FIRE FLAME EFFECT FOR GOLD AUTHOR ===== */
         .gold-author {
             font-weight: 800;
             background: linear-gradient(135deg, #ffe066 0%, #ffd700 40%, #ffffff 50%, #ffd700 60%, #b8860b 100%);
@@ -183,21 +182,34 @@
             animation: goldShine 4s linear infinite;
             display: inline-block;
             transition: all 0.6s ease;
-        }
-
-        body.light-mode .gold-author {
-            color: #FF6B6B;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
-            background: unset;
-            text-shadow: 0 0 8px rgba(255, 107, 107, 0.3);
-            font-weight: 800;
-            animation: none;
+            position: relative;
         }
 
         @keyframes goldShine {
             to {
                 background-position: 200% center;
+            }
+        }
+
+        /* Fire flame effect for Light Mode */
+        body.light-mode .gold-author {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8787 30%, #FFB74D 60%, #FF6B6B 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+            animation: fireFlame 3s ease-in-out infinite;
+            font-weight: 800;
+        }
+
+        @keyframes fireFlame {
+            0%, 100% {
+                background-position: 0% center;
+                text-shadow: 0 0 10px rgba(255, 107, 107, 0.5), 0 0 20px rgba(255, 152, 0, 0.3);
+            }
+            50% {
+                background-position: 100% center;
+                text-shadow: 0 0 20px rgba(255, 107, 107, 0.8), 0 0 30px rgba(255, 152, 0, 0.6);
             }
         }
 
@@ -230,10 +242,10 @@
         }
 
         body.light-mode .search-input {
-            background: rgba(255, 255, 255, 0.9);
-            border-color: rgba(6, 182, 212, 0.4);
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(6, 182, 212, 0.5);
             color: #1E293B;
-            box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
         }
 
         body.light-mode .search-input::placeholder {
@@ -246,7 +258,7 @@
         }
 
         body.light-mode .search-input:focus {
-            box-shadow: 0 0 25px rgba(6, 182, 212, 0.5);
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
         }
 
         .category-tabs {
@@ -269,9 +281,10 @@
         }
 
         body.light-mode .tab-btn {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(6, 182, 212, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(6, 182, 212, 0.3);
             color: #64748B;
+            box-shadow: 0 2px 8px rgba(6, 182, 212, 0.1);
         }
 
         .tab-btn:hover, .tab-btn.active {
@@ -284,6 +297,9 @@
 
         body.light-mode .tab-btn.active {
             color: #fff;
+            background: linear-gradient(135deg, #06B6D4, #A78BFA);
+            border-color: #06B6D4;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.6);
         }
 
         .video-grid {
@@ -307,7 +323,7 @@
 
         body.light-mode .video-card {
             border: 2px solid rgba(6, 182, 212, 0.2);
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.1);
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.12);
         }
 
         .video-card:hover {
@@ -317,7 +333,7 @@
         }
 
         body.light-mode .video-card:hover {
-            box-shadow: 0 15px 35px rgba(6, 182, 212, 0.3), 0 0 30px rgba(167, 139, 250, 0.15);
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.4), 0 0 30px rgba(167, 139, 250, 0.2);
             border-color: var(--primary-neon);
         }
 
@@ -357,9 +373,10 @@
         }
 
         body.light-mode .playlist-count-badge {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             border-color: #06B6D4;
             color: #06B6D4;
+            box-shadow: 0 2px 8px rgba(6, 182, 212, 0.2);
         }
 
         .badge-cat {
@@ -375,9 +392,10 @@
         }
 
         body.light-mode .badge-cat {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             border-color: #06B6D4;
             color: #06B6D4;
+            box-shadow: 0 2px 8px rgba(6, 182, 212, 0.2);
         }
 
         .badge-word {
@@ -436,7 +454,7 @@
         body.light-mode .btn-open-album {
             background: linear-gradient(135deg, #06B6D4, #A78BFA);
             color: #fff;
-            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
         }
 
         .btn-open-album:hover {
@@ -444,7 +462,7 @@
         }
 
         body.light-mode .btn-open-album:hover {
-            box-shadow: 0 0 25px rgba(6, 182, 212, 0.8), 0 0 15px rgba(167, 139, 250, 0.5);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.8), 0 0 20px rgba(167, 139, 250, 0.6);
         }
 
         .modal-player {
@@ -460,7 +478,7 @@
         }
 
         body.light-mode .modal-player {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.97);
             backdrop-filter: blur(15px);
         }
 
@@ -481,7 +499,7 @@
         body.light-mode .playlist-layout {
             background: #fff;
             border-color: #06B6D4;
-            box-shadow: 0 0 50px rgba(6, 182, 212, 0.2);
+            box-shadow: 0 0 50px rgba(6, 182, 212, 0.25);
         }
 
         .main-video-area {
@@ -551,7 +569,7 @@
 
         body.light-mode .btn-download-file {
             background: linear-gradient(135deg, #FF6B6B, #FF8787);
-            box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
         }
 
         .btn-download-file:hover {
@@ -645,7 +663,7 @@
         }
 
         body.light-mode .playlist-item {
-            background: rgba(6, 182, 212, 0.08);
+            background: rgba(6, 182, 212, 0.06);
         }
 
         .playlist-item:hover, .playlist-item.active {
@@ -654,7 +672,7 @@
         }
 
         body.light-mode .playlist-item:hover, body.light-mode .playlist-item.active {
-            background: rgba(6, 182, 212, 0.25);
+            background: rgba(6, 182, 212, 0.2);
         }
 
         .playlist-item img {
