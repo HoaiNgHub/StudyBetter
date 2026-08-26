@@ -274,7 +274,7 @@
             border-radius: 18px;
             border: 2px solid var(--primary-neon);
             width: 90%;
-            max-width: 400px;
+            max-width: 420px;
             text-align: center;
             position: relative;
             box-shadow: 0 0 35px rgba(0, 255, 204, 0.3);
@@ -304,21 +304,66 @@
             color: #06B6D4;
         }
 
+        /* Bố cục 2 nút xác nhận & quay lại */
+        .download-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .btn-cancel-download {
+            flex: 1;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-sub);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .btn-cancel-download {
+            background: #e2e8f0;
+            color: #64748B;
+            border-color: #cbd5e1;
+        }
+
+        .btn-cancel-download:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        body.light-mode .btn-cancel-download:hover {
+            background: #cbd5e1;
+            color: #1e293b;
+        }
+
         .btn-confirm-download {
-            padding: 12px 30px;
+            flex: 1;
+            padding: 12px 20px;
             background: linear-gradient(135deg, #00ffcc, #00b8ff);
             color: #000;
             border: none;
             border-radius: 8px;
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
         }
 
+        body.light-mode .btn-confirm-download {
+            background: linear-gradient(135deg, #06B6D4, #A78BFA);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+
         .btn-confirm-download:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
             box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
         }
 
@@ -1380,12 +1425,15 @@
         </div>
     </div>
 
-    <!-- ===== MODAL BẢNG XÁC NHẬN TẢI FILE ===== -->
+    <!-- ===== MODAL BẢNG XÁC NHẬN TẢI FILE (ĐÃ THÊM NÚT QUAY LẠI) ===== -->
     <div class="modal-download" id="downloadConfirmModal">
         <div class="download-content">
             <h3 class="download-title">Tiếp Tục Tải</h3>
-            <p style="margin-bottom: 20px; color: var(--text-sub);">Bạn có chắc chắn muốn tải file tài liệu này về máy không?</p>
-            <button class="btn-confirm-download" onclick="startDownloadProcess()">Tiếp Tục</button>
+            <p style="margin-bottom: 25px; color: var(--text-sub); font-size: 0.95rem; line-height: 1.5;">Bạn có chắc chắn muốn tải file tài liệu này về máy không?</p>
+            <div class="download-actions">
+                <button class="btn-cancel-download" onclick="closeDownloadConfirm()">Quay lại</button>
+                <button class="btn-confirm-download" onclick="startDownloadProcess()">Tiếp Tục</button>
+            </div>
         </div>
     </div>
 
@@ -1555,6 +1603,11 @@
                 currentTargetDownloadUrl = album.fileUrl;
             }
             document.getElementById('downloadConfirmModal').style.display = 'flex';
+        }
+
+        // Đóng modal xác nhận khi bấm Quay lại
+        function closeDownloadConfirm() {
+            document.getElementById('downloadConfirmModal').style.display = 'none';
         }
 
         function startDownloadProcess() {
