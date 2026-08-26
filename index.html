@@ -1500,14 +1500,58 @@
 
     <script>
         let currentTargetDownloadUrl = "";
-        const examPracticeUrl = "https://drive.google.com/file/d/19VMOb2A4SEW2CFOHbGFnKjymjHfImp3Q/view";
+
+        const albumsData = [
+            {
+                albumTitle: "Bộ Bài Giải EXCEL 2019 và FILE Đề",
+                fileUrl: "https://drive.google.com/file/d/1_p14paetwGodKiByRwioUMD33wka1oa_/view",
+                examUrl: "https://drive.google.com/file/d/19VMOb2A4SEW2CFOHbGFnKjymjHfImp3Q/view",
+                videos: [
+                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 1", youtubeId: "zNF2f2oJ8ZE", duration: "10:15" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 2", youtubeId: "lkyTJakc254", duration: "08:40" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 3", youtubeId: "BsIbiqj7l4M", duration: "12:05" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 4", youtubeId: "GVqDYH2gKro", duration: "06:30" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 5", youtubeId: "1iO64evzNQ0", duration: "09:15" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 6", youtubeId: "3llvysoZoHE", duration: "11:20" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 7", youtubeId: "-I0kv5XW_AY", duration: "07:50" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 1", youtubeId: "-Wg8XZrtj4w", duration: "10:45" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 2", youtubeId: "2PQXi2b6kWs", duration: "08:15" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 3", youtubeId: "96l1nthCBqI", duration: "11:30" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 4", youtubeId: "LyVDBTtAQ0c", duration: "09:05" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 5", youtubeId: "LmN8s58X1h4", duration: "12:40" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 6", youtubeId: "nK8VmEP3sps", duration: "07:25" },
+                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 7", youtubeId: "GENqe2PhBNs", duration: "13:10" }
+                ]
+            },
+            {
+                albumTitle: "Bộ Bài Giải Word 2019 và FILE Đề",
+                fileUrl: "https://drive.google.com/file/d/1X7dL9Cqk4LqSU_s36nQL20lt7Nfwiqq8/view",
+                examUrl: "https://drive.google.com/file/d/1-gBOMrbP7bIt_CG22A7W3r41d0TbLwwg/view",
+                videos: [
+                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 1", youtubeId: "uxfQiSbaipU", duration: "09:30" },
+                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 2", youtubeId: "lT5E9o0Dcb4", duration: "08:15" },
+                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 3", youtubeId: "ell6BGYpvto", duration: "07:45" },
+                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 4", youtubeId: "f9lTnCogpfI", duration: "10:20" },
+                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 5", youtubeId: "AFOfAzAsus8", duration: "06:50" },
+                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 6", youtubeId: "PVnKD8tSf3E", duration: "11:10" },
+                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 7", youtubeId: "4rbQV03Of2M", duration: "08:40" },
+                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 1", youtubeId: "L_xIXewAkEA", duration: "09:15" },
+                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 2", youtubeId: "DWcL7R5HWzU", duration: "07:30" },
+                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 3", youtubeId: "2FuPhV1yGpY", duration: "10:05" },
+                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 4", youtubeId: "cRlQyvomyj4", duration: "08:55" },
+                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 5", youtubeId: "SmXoYS8I9wA", duration: "12:10" },
+                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 6", youtubeId: "1rsDmyv0bdQ", duration: "06:40" },
+                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 7", youtubeId: "UiXtfiRZoaI", duration: "09:25" }
+                ]
+            }
+        ];
 
         // ===== TÍNH NĂNG XÁC NHẬN VÀ TẢI FILE =====
         function openDownloadConfirm(type) {
+            const album = albumsData[currentAlbumIndex];
             if (type === 'exam') {
-                currentTargetDownloadUrl = examPracticeUrl;
+                currentTargetDownloadUrl = album.examUrl;
             } else {
-                const album = albumsData[currentAlbumIndex];
                 currentTargetDownloadUrl = album.fileUrl;
             }
             document.getElementById('downloadConfirmModal').style.display = 'flex';
@@ -1595,49 +1639,6 @@
             }
         });
 
-        const albumsData = [
-            {
-                albumTitle: "Bộ Bài Giải EXCEL 2019 và FILE Đề",
-                fileUrl: "https://drive.google.com/file/d/1_p14paetwGodKiByRwioUMD33wka1oa_/view",
-                videos: [
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 1", youtubeId: "zNF2f2oJ8ZE", duration: "10:15" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 2", youtubeId: "lkyTJakc254", duration: "08:40" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 3", youtubeId: "BsIbiqj7l4M", duration: "12:05" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 4", youtubeId: "GVqDYH2gKro", duration: "06:30" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 5", youtubeId: "1iO64evzNQ0", duration: "09:15" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 6", youtubeId: "3llvysoZoHE", duration: "11:20" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 7", youtubeId: "-I0kv5XW_AY", duration: "07:50" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 1", youtubeId: "-Wg8XZrtj4w", duration: "10:45" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 2", youtubeId: "2PQXi2b6kWs", duration: "08:15" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 3", youtubeId: "96l1nthCBqI", duration: "11:30" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 4", youtubeId: "LyVDBTtAQ0c", duration: "09:05" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 5", youtubeId: "LmN8s58X1h4", duration: "12:40" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 6", youtubeId: "nK8VmEP3sps", duration: "07:25" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 7", youtubeId: "GENqe2PhBNs", duration: "13:10" }
-                ]
-            },
-            {
-                albumTitle: "Bộ Bài Giải Word 2019 và FILE Đề",
-                fileUrl: "https://drive.google.com/file/d/1X7dL9Cqk4LqSU_s36nQL20lt7Nfwiqq8/view",
-                videos: [
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 1", youtubeId: "uxfQiSbaipU", duration: "09:30" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 2", youtubeId: "lT5E9o0Dcb4", duration: "08:15" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 3", youtubeId: "ell6BGYpvto", duration: "07:45" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 4", youtubeId: "f9lTnCogpfI", duration: "10:20" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 5", youtubeId: "AFOfAzAsus8", duration: "06:50" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 6", youtubeId: "PVnKD8tSf3E", duration: "11:10" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 7", youtubeId: "4rbQV03Of2M", duration: "08:40" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 1", youtubeId: "L_xIXewAkEA", duration: "09:15" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 2", youtubeId: "DWcL7R5HWzU", duration: "07:30" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 3", youtubeId: "2FuPhV1yGpY", duration: "10:05" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 4", youtubeId: "cRlQyvomyj4", duration: "08:55" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 5", youtubeId: "SmXoYS8I9wA", duration: "12:10" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 6", youtubeId: "1rsDmyv0bdQ", duration: "06:40" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 7", youtubeId: "UiXtfiRZoaI", duration: "09:25" }
-                ]
-            }
-        ];
-
         // Canvas Effect
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
@@ -1684,7 +1685,6 @@
             const album = albumsData[albumIdx];
 
             document.getElementById('playlistHeaderTitle').innerText = album.albumTitle.toUpperCase();
-            currentTargetDownloadUrl = album.fileUrl;
 
             const container = document.getElementById('playlistItemsContainer');
             container.innerHTML = '';
