@@ -764,6 +764,7 @@
             animation: hngBotFloat 3s ease-in-out infinite;
             filter: drop-shadow(0 0 12px rgba(0, 255, 204, 0.35));
             user-select: none;
+            transition: transform 0.4s ease-in-out;
         }
 
         .hng-bot-antenna {
@@ -1310,8 +1311,7 @@
 
         setInterval(changeHngBotMessage, 15000);
 
-        // Né chuột: chỉ kích hoạt khi con trỏ thực sự tới gần robot,
-        // và giới hạn tần suất để không gây khó chịu.
+        // Né chuột nâng cấp: Tính toán khoảng cách & đổi thoại khi né
         document.addEventListener('mousemove', function(e) {
             const now = Date.now();
             if (now - hngBotLastEscape < 850) return;
@@ -1325,11 +1325,22 @@
                 hngBotLastEscape = now;
 
                 const moveRight = e.clientX < cx;
+                
+                // Hiệu ứng né trái / phải
                 hngBotCharacter.classList.remove('hng-run-right', 'hng-run-left');
                 void hngBotCharacter.offsetWidth;
                 hngBotCharacter.classList.add(moveRight ? 'hng-run-right' : 'hng-run-left');
 
-                // Đổi câu ngắn khi bị "đuổi" để tăng độ cute.
+                // Dịch chuyển khoảng cách nhẹ
+                const offset = moveRight ? 60 : -60;
+                hngBotCharacter.style.transform = `translateX(${offset}px)`;
+
+                // Trả về vị trí cũ sau 0.8 giây
+                setTimeout(() => {
+                    hngBotCharacter.style.transform = 'translateX(0px)';
+                }, 800);
+
+                // Đổi câu thoại ngắn khi bị "đuổi"
                 const escapeMessages = [
                     "Ê ê, đừng bắt tuiii! 😂",
                     "Haha, bắt được tui đi! 🤖💨",
