@@ -819,6 +819,7 @@
             border-radius: 50%;
             background: #00ffcc;
             box-shadow: 0 0 8px #00ffcc;
+            transition: transform 0.05s ease-out; /* Giúp mắt chuyển động mượt mà hơn */
         }
 
         .hng-bot-eye.left { left: 18px; }
@@ -1294,6 +1295,7 @@
         const hngBot = document.getElementById('hngBot');
         const hngBotCharacter = document.getElementById('hngBotCharacter');
         const hngBotBubble = document.getElementById('hngBotBubble');
+        const hngEyes = document.querySelectorAll('.hng-bot-eye');
         let hngBotMessageIndex = 0;
         let hngBotLastEscape = 0;
 
@@ -1311,36 +1313,50 @@
 
         setInterval(changeHngBotMessage, 15000);
 
-        // Né chuột nâng cấp: Tính toán khoảng cách & đổi thoại khi né
+        // Xử lý sự kiện di chuyển chuột: Mắt xoay theo chuột + Né chuột khi tới gần
         document.addEventListener('mousemove', function(e) {
             const now = Date.now();
-            if (now - hngBotLastEscape < 850) return;
-
             const rect = hngBotCharacter.getBoundingClientRect();
             const cx = rect.left + rect.width / 2;
             const cy = rect.top + rect.height / 2;
-            const distance = Math.hypot(e.clientX - cx, e.clientY - cy);
 
-            if (distance < 105) {
+            // 1. HIỆU ỨNG MẮT THEO DÕI CHUỘT
+            hngEyes.forEach(eye => {
+                const eyeRect = eye.getBoundingClientRect();
+                const eyeCx = eyeRect.left + eyeRect.width / 2;
+                const eyeCy = eyeRect.top + eyeRect.height / 2;
+
+                const angle = Math.atan2(e.clientY - eyeCy, e.clientX - eyeCx);
+                const maxDistance = 4; // Khoảng cách tối đa mắt dịch chuyển (px)
+                const distance = Math.min(maxDistance, Math.hypot(e.clientX - eyeCx, e.clientY - eyeCy) / 10);
+
+                const eyeX = Math.cos(angle) * distance;
+                const eyeY = Math.sin(angle) * distance;
+
+                eye.style.transform = `translate(${eyeX}px, ${eyeY}px)`;
+            });
+
+            // 2. HIỆU ỨNG NÉ CHUỘT KHI TỚI GẦN
+            if (now - hngBotLastEscape < 850) return;
+
+            const distToBot = Math.hypot(e.clientX - cx, e.clientY - cy);
+
+            if (distToBot < 105) {
                 hngBotLastEscape = now;
 
                 const moveRight = e.clientX < cx;
                 
-                // Hiệu ứng né trái / phải
                 hngBotCharacter.classList.remove('hng-run-right', 'hng-run-left');
                 void hngBotCharacter.offsetWidth;
                 hngBotCharacter.classList.add(moveRight ? 'hng-run-right' : 'hng-run-left');
 
-                // Dịch chuyển khoảng cách nhẹ
                 const offset = moveRight ? 60 : -60;
                 hngBotCharacter.style.transform = `translateX(${offset}px)`;
 
-                // Trả về vị trí cũ sau 0.8 giây
                 setTimeout(() => {
                     hngBotCharacter.style.transform = 'translateX(0px)';
                 }, 800);
 
-                // Đổi câu thoại ngắn khi bị "đuổi"
                 const escapeMessages = [
                     "Ê ê, đừng bắt tuiii! 😂",
                     "Haha, bắt được tui đi! 🤖💨",
@@ -1354,6 +1370,13 @@
                     hngBotBubble.textContent = hngBotMessages[hngBotMessageIndex];
                 }, 1700);
             }
+        });
+
+        // Trả mắt về vị trí ban đầu khi chuột rời khỏi màn hình
+        document.addEventListener('mouseleave', function() {
+            hngEyes.forEach(eye => {
+                eye.style.transform = 'translate(0px, 0px)';
+            });
         });
     </script>
 </body>
