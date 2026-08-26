@@ -675,6 +675,16 @@
             color: #FF6B6B;
         }
 
+        .badge-ppt {
+            border-color: #ff9900;
+            color: #ff9900;
+        }
+
+        body.light-mode .badge-ppt {
+            border-color: #f97316;
+            color: #f97316;
+        }
+
         .card-body {
             padding: 20px;
             display: flex;
@@ -730,6 +740,21 @@
 
         body.light-mode .btn-open-album:hover {
             box-shadow: 0 0 30px rgba(6, 182, 212, 0.8), 0 0 20px rgba(167, 139, 250, 0.6);
+        }
+
+        /* ===== NÚT BỊ KHÓA / ĐANG CẬP NHẬT ===== */
+        .btn-open-album.disabled {
+            background: linear-gradient(135deg, #475569, #334155) !important;
+            color: #94a3b8 !important;
+            cursor: not-allowed !important;
+            box-shadow: none !important;
+            opacity: 0.7;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-open-album.disabled:hover {
+            transform: none !important;
+            box-shadow: none !important;
         }
 
         .modal-player {
@@ -1391,12 +1416,13 @@
 
         <div class="filter-section">
             <div class="search-box">
-                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm đề thi Excel, Word, VLOOKUP..." onkeyup="filterVideos()">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm đề thi Excel, Word, PowerPoint, VLOOKUP..." onkeyup="filterVideos()">
             </div>
             <div class="category-tabs">
                 <button class="tab-btn active" onclick="filterCategory('all', this)">Tất Cả</button>
                 <button class="tab-btn" onclick="filterCategory('excel2019', this)">📊 Giải EXCEL 2019</button>
                 <button class="tab-btn" onclick="filterCategory('word2019', this)">📝 Giải WORD 2019</button>
+                <button class="tab-btn" onclick="filterCategory('powerpoint2019', this)">📙 Giải POWERPOINT 2019</button>
                 <button class="tab-btn" onclick="filterCategory('study', this)">Mẹo Học Tập</button>
                 <button class="tab-btn" onclick="filterCategory('code', this)">Lập Trình & Web</button>
             </div>
@@ -1426,6 +1452,20 @@
                     <h3 class="video-title">Bộ Bài Giải Word 2019 và FILE Đề</h3>
                     <p class="video-desc">Danh sách video giải bài tập WORD 2019.</p>
                     <button class="btn-open-album">▶ Mở Danh Sách Video</button>
+                </div>
+            </div>
+
+            <!-- MỤC MỚI: POWERPOINT 2019 (ĐANG CẬP NHẬT) -->
+            <div class="video-card" data-category="powerpoint2019" data-title="bộ bài giải powerpoint 2019 và file đề">
+                <div class="thumb-box">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&auto=format&fit=crop" alt="PowerPoint 2019">
+                    <div class="badge-cat badge-ppt">Giải POWERPOINT 2019</div>
+                    <div class="playlist-count-badge">⏳ Đang Cập Nhật</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="video-title">Bộ Bài Giải PowerPoint 2019 Và FILE Đề</h3>
+                    <p class="video-desc">Danh sách video bài giải PowerPoint 2019</p>
+                    <button class="btn-open-album disabled" disabled>🔒 Đang Được Cập Nhật!</button>
                 </div>
             </div>
         </div>
