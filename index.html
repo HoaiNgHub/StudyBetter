@@ -256,6 +256,120 @@
             transform: rotate(90deg) scale(1.2);
         }
 
+        /* ===== MODAL XÁC NHẬN & THÀNH CÔNG TẢI FILE ===== */
+        .modal-download {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .download-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 18px;
+            border: 2px solid var(--primary-neon);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 35px rgba(0, 255, 204, 0.3);
+            backdrop-filter: blur(15px);
+            animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        body.light-mode .download-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: #06B6D4;
+            box-shadow: 0 0 35px rgba(6, 182, 212, 0.3);
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .download-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: var(--primary-neon);
+            margin-bottom: 20px;
+        }
+
+        body.light-mode .download-title {
+            color: #06B6D4;
+        }
+
+        .btn-confirm-download {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #00ffcc, #00b8ff);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+        }
+
+        .btn-confirm-download:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
+        }
+
+        .success-icon-wrapper {
+            margin: 15px auto;
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #00ff88;
+            box-shadow: 0 0 20px #00ff88;
+            animation: successPulse 1.5s infinite alternate;
+        }
+
+        .success-icon {
+            font-size: 2.5rem;
+            color: #00ff88;
+            line-height: 1;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(0.9); box-shadow: 0 0 15px #00ff88; }
+            100% { transform: scale(1.1); box-shadow: 0 0 30px #00ff88; }
+        }
+
+        .btn-close-success {
+            padding: 10px 25px;
+            background: #1e293b;
+            color: #fff;
+            border: 1px solid var(--primary-neon);
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .btn-close-success {
+            background: #e2e8f0;
+            color: #1e293b;
+            border-color: #06B6D4;
+        }
+
+        .btn-close-success:hover {
+            background: var(--primary-neon);
+            color: #000;
+        }
+
         #particle-canvas {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -718,6 +832,7 @@
             width: fit-content;
             box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         body.light-mode .btn-download-file {
@@ -1214,7 +1329,7 @@
         </div>
     </div>
 
-    <!-- ===== CONTAINER NÚT GÓP Ý VÀ ĐỔI GIAO DIỆN (NẰM CẠNH NHAU Ở GÓC TRÊN BÊN PHẢI) ===== -->
+    <!-- ===== CONTAINER NÚT GÓP Ý VÀ ĐỔI GIAO DIỆN ===== -->
     <div class="top-right-controls">
         <button class="feedback-toggle-btn" onclick="openFeedback()">💬 Góp Ý</button>
         <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
@@ -1228,10 +1343,7 @@
             <span class="close-feedback" onclick="closeFeedback()">&times;</span>
             <h2 class="feedback-title">GỬI Ý KIẾN</h2>
             <form id="feedbackForm">
-                <!-- ACCESS KEY CỦA WEB3FORMS -->
                 <input type="hidden" name="access_key" value="b99a548e-7ae5-4031-9603-dd6af26ae6b2">
-                
-                <!-- Tiêu đề email nhận về Gmail -->
                 <input type="hidden" name="subject" value="HNG ACADEMY - Ý kiến đóng góp mới!">
 
                 <input type="text" name="Tên" class="fb-input" placeholder="Tên của bạn..." required>
@@ -1240,6 +1352,27 @@
                 
                 <button type="submit" class="btn-submit-feedback">GỬI Ý KIẾN 🚀</button>
             </form>
+        </div>
+    </div>
+
+    <!-- ===== MODAL BẢNG XÁC NHẬN TẢI FILE ===== -->
+    <div class="modal-download" id="downloadConfirmModal">
+        <div class="download-content">
+            <h3 class="download-title">Tiếp Tục Tải</h3>
+            <p style="margin-bottom: 20px; color: var(--text-sub);">Bạn có chắc chắn muốn tải file tài liệu này về máy không?</p>
+            <button class="btn-confirm-download" onclick="startDownloadProcess()">Tiếp Tục</button>
+        </div>
+    </div>
+
+    <!-- ===== MODAL BẢNG THÀNH CÔNG ===== -->
+    <div class="modal-download" id="downloadSuccessModal">
+        <div class="download-content">
+            <div class="success-icon-wrapper">
+                <span class="success-icon">✓</span>
+            </div>
+            <h3 class="download-title" style="color: #00ff88; margin-bottom: 10px;">Tải File Thành Công!</h3>
+            <p style="color: var(--text-sub);">Tài liệu đã được hệ thống bắt đầu tải về máy của bạn.</p>
+            <button class="btn-close-success" onclick="closeSuccessModal()">Đóng</button>
         </div>
     </div>
 
@@ -1307,9 +1440,9 @@
                 </div>
                 <div class="video-meta-box">
                     <h4 class="playing-title" id="currentVideoTitle">Tên Bài Học Đang Phát</h4>
-                    <a class="btn-download-file" id="currentFileBtn" href="#" target="_blank">
-                        📥 TẢI FILE ĐỀ BÀI (GOOGLE DRIVE)
-                    </a>
+                    <button class="btn-download-file" onclick="openDownloadConfirm()">
+                        📥 TẢI FILE ĐỀ BÀI
+                    </button>
                 </div>
             </div>
 
@@ -1321,6 +1454,25 @@
     </div>
 
     <script>
+        let currentTargetDownloadUrl = "";
+
+        // ===== TÍNH NĂNG XÁC NHẬN VÀ TẢI FILE =====
+        function openDownloadConfirm() {
+            document.getElementById('downloadConfirmModal').style.display = 'flex';
+        }
+
+        function startDownloadProcess() {
+            document.getElementById('downloadConfirmModal').style.display = 'none';
+            if (currentTargetDownloadUrl) {
+                window.open(currentTargetDownloadUrl, '_blank');
+            }
+            document.getElementById('downloadSuccessModal').style.display = 'flex';
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('downloadSuccessModal').style.display = 'none';
+        }
+
         // ===== TÍNH NĂNG GÓP Ý =====
         function openFeedback() {
             document.getElementById('feedbackModal').style.display = 'flex';
@@ -1480,7 +1632,7 @@
             const album = albumsData[albumIdx];
 
             document.getElementById('playlistHeaderTitle').innerText = album.albumTitle.toUpperCase();
-            document.getElementById('currentFileBtn').href = album.fileUrl;
+            currentTargetDownloadUrl = album.fileUrl;
 
             const container = document.getElementById('playlistItemsContainer');
             container.innerHTML = '';
