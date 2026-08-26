@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG ACADEMY | Kho Video & Giải Đề Excel 2019</title>
+    <title>HNG ACADEMY | Kho Video & Giải Bài Tập Office 2019</title>
     <!-- Fonts Gaming / Cyberpunk -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -224,6 +224,11 @@
             font-weight: 700;
         }
 
+        .badge-word {
+            border-color: #00b8ff;
+            color: #00b8ff;
+        }
+
         .card-body {
             padding: 20px;
             display: flex;
@@ -258,6 +263,7 @@
             cursor: pointer;
             box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
             transition: all 0.3s ease;
+            margin-top: auto;
         }
 
         .btn-open-album:hover {
@@ -443,11 +449,12 @@
         <!-- Filter & Search -->
         <div class="filter-section">
             <div class="search-box">
-                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm đề thi Excel, VLOOKUP, PivotTable..." onkeyup="filterVideos()">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm đề thi Excel, Word, VLOOKUP..." onkeyup="filterVideos()">
             </div>
             <div class="category-tabs">
-                <button class="tab-btn active" onclick="filterCategory('excel2019', this)">📊 Giải EXCEL 2019</button>
-                <button class="tab-btn" onclick="filterCategory('all', this)">Tất Cả</button>
+                <button class="tab-btn active" onclick="filterCategory('all', this)">Tất Cả</button>
+                <button class="tab-btn" onclick="filterCategory('excel2019', this)">📊 Giải EXCEL 2019</button>
+                <button class="tab-btn" onclick="filterCategory('word2019', this)">📝 Giải WORD 2019</button>
                 <button class="tab-btn" onclick="filterCategory('study', this)">Mẹo Học Tập</button>
                 <button class="tab-btn" onclick="filterCategory('code', this)">Lập Trình & Web</button>
             </div>
@@ -456,44 +463,30 @@
         <!-- Danh sách Các Mục Lớn (Album Đề Thi) -->
         <div class="video-grid" id="videoContainer">
 
-            <!-- MỤC LỚN 1: BỘ ĐỀ THI EXCEL 2019 CƠ BẢN TỚI NÂNG CAO -->
-            <div class="video-card" data-category="excel2019" data-title="trọn bộ 10 đề thi excel 2019 vlookup if sumif countif" onclick="openPlaylist(0)">
+            <!-- MỤC LỚN 1: BỘ BÀI GIẢI EXCEL 2019 VÀ FILE ĐỀ -->
+            <div class="video-card" data-category="excel2019" data-title="bộ bài giải excel 2019 và file đề" onclick="openPlaylist(0)">
                 <div class="thumb-box">
-                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
+                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail Excel">
                     <div class="badge-cat">Giải EXCEL 2019</div>
                     <div class="playlist-count-badge">📑 5 Video Bài Giải</div>
                 </div>
                 <div class="card-body">
-                    <h3 class="video-title">Trọn Bộ Đề Thi Thực Hành Excel 2019 (Có File Tải)</h3>
-                    <p class="video-desc">Danh sách video giải chi tiết từng câu hỏi trong đề thi Tin Học Văn Phòng 2019.</p>
+                    <h3 class="video-title">Bộ Bài Giải EXCEL 2019 và FILE Đề</h3>
+                    <p class="video-desc">Danh sách video hướng dẫn giải bài tập EXCEL 2019.</p>
                     <button class="btn-open-album">▶ Mở Danh Sách Video</button>
                 </div>
             </div>
 
-            <!-- MỤC LỚN 2: CHUYÊN ĐỀ HÀM TRA CỨU EXCEL -->
-            <div class="video-card" data-category="excel2019" data-title="chuyên đề hàm vlookup hlookup index match excel 2019" onclick="openPlaylist(1)">
+            <!-- MỤC LỚN 2: BỘ BÀI GIẢI WORD 2019 VÀ FILE ĐỀ -->
+            <div class="video-card" data-category="word2019" data-title="bộ bài giải word 2019 và file đề" onclick="openPlaylist(1)">
                 <div class="thumb-box">
-                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
-                    <div class="badge-cat">Giải EXCEL 2019</div>
-                    <div class="playlist-count-badge">📑 3 Video Bài Giải</div>
+                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail Word">
+                    <div class="badge-cat badge-word">Giải WORD 2019</div>
+                    <div class="playlist-count-badge">📑 4 Video Bài Giải</div>
                 </div>
                 <div class="card-body">
-                    <h3 class="video-title">Chuyên Đề: Làm Chủ Hàm VLOOKUP & INDEX MATCH</h3>
-                    <p class="video-desc">Chuỗi bài giảng từ cơ bản đến nâng cao về các hàm tìm kiếm tra cứu dữ liệu.</p>
-                    <button class="btn-open-album">▶ Mở Danh Sách Video</button>
-                </div>
-            </div>
-
-            <!-- MỤC LỚN 3: BÀI BẢO CÁO PIVOTTABLE -->
-            <div class="video-card" data-category="excel2019" data-title="tạo báo cáo pivottable tự động excel 2019" onclick="openPlaylist(2)">
-                <div class="thumb-box">
-                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
-                    <div class="badge-cat">Giải EXCEL 2019</div>
-                    <div class="playlist-count-badge">📑 2 Video Bài Giải</div>
-                </div>
-                <div class="card-body">
-                    <h3 class="video-title">Báo Cáo Doanh Thu Tự Động Với PivotTable Excel</h3>
-                    <p class="video-desc">Hướng dẫn xử lý dữ liệu lớn và vẽ biểu đồ báo cáo chuyên nghiệp.</p>
+                    <h3 class="video-title">Bộ Bài Giải Word 2019 và FILE Đề</h3>
+                    <p class="video-desc">Danh sách video giải bài tập WORD 2019.</p>
                     <button class="btn-open-album">▶ Mở Danh Sách Video</button>
                 </div>
             </div>
@@ -514,7 +507,7 @@
                 <div class="video-meta-box">
                     <h4 class="playing-title" id="currentVideoTitle">Tên Bài Học Đang Phát</h4>
                     <a class="btn-download-file" id="currentFileBtn" href="#" target="_blank">
-                        📥 TẢI FILE EXCEL / ĐỀ BÀI (DRIVE)
+                        📥 TẢI FILE ĐỀ BÀI (GOOGLE DRIVE)
                     </a>
                 </div>
             </div>
@@ -523,7 +516,7 @@
             <div class="playlist-sidebar">
                 <div class="playlist-header" id="playlistHeaderTitle">DANH SÁCH BÀI GIẢI</div>
                 <div class="playlist-items-list" id="playlistItemsContainer">
-                    <!-- Danh sách video con sẽ tự động load bằng JS tại đây -->
+                    <!-- Danh sách video con load bằng JS -->
                 </div>
             </div>
 
@@ -534,8 +527,8 @@
         /* DỮ LIỆU CÁC MỤC LỚN VÀ VIDEO CON TƯƠNG ỨNG */
         const albumsData = [
             {
-                albumTitle: "Trọn Bộ Đề Thi Thực Hành Excel 2019",
-                fileUrl: "https://drive.google.com", // Link tải chung cho bộ đề này
+                albumTitle: "Bộ Bài Giải EXCEL 2019 và FILE Đề",
+                fileUrl: "https://drive.google.com", // Link file đề Excel của bạn
                 videos: [
                     { title: "Bài 1: Giải Câu 1 & 2 - Dùng Hàm IF & VLOOKUP", youtubeId: "VsbCyOtNt7s", duration: "10:15" },
                     { title: "Bài 2: Giải Câu 3 - Tính Bảng Lương & Thưởng", youtubeId: "VsbCyOtNt7s", duration: "08:40" },
@@ -545,20 +538,13 @@
                 ]
             },
             {
-                albumTitle: "Chuyên Đề Hàm VLOOKUP & INDEX MATCH",
-                fileUrl: "https://drive.google.com",
+                albumTitle: "Bộ Bài Giải Word 2019 và FILE Đề",
+                fileUrl: "https://drive.google.com", // Link file đề Word của bạn
                 videos: [
-                    { title: "Bài 1: VLOOKUP Cơ Bản Cho Người Mới Bắt Đầu", youtubeId: "VsbCyOtNt7s", duration: "09:10" },
-                    { title: "Bài 2: VLOOKUP Nâng Cao Kết Hợp Hàm IF", youtubeId: "VsbCyOtNt7s", duration: "14:25" },
-                    { title: "Bài 3: Thay Thế VLOOKUP Bằng INDEX & MATCH", youtubeId: "VsbCyOtNt7s", duration: "11:50" }
-                ]
-            },
-            {
-                albumTitle: "Báo Cáo Doanh Thu Tự Động Với PivotTable",
-                fileUrl: "https://drive.google.com",
-                videos: [
-                    { title: "Bài 1: Cách Tạo PivotTable Báo Cáo Nhanh", youtubeId: "VsbCyOtNt7s", duration: "07:45" },
-                    { title: "Bài 2: Vẽ Biểu Đồ Động Với PivotChart", youtubeId: "VsbCyOtNt7s", duration: "13:10" }
+                    { title: "Bài 1: Định Dạng Văn Bản & Định Dạng Tab", youtubeId: "VsbCyOtNt7s", duration: "09:30" },
+                    { title: "Bài 2: Chèn Bảng Table & Công Thức Tính", youtubeId: "VsbCyOtNt7s", duration: "11:15" },
+                    { title: "Bài 3: Tạo Mục Lục Tự Động Trong Word 2019", youtubeId: "VsbCyOtNt7s", duration: "07:45" },
+                    { title: "Bài 4: Trộn Thư Mail Merge Siêu Nhanh", youtubeId: "VsbCyOtNt7s", duration: "13:00" }
                 ]
             }
         ];
@@ -656,7 +642,7 @@
         }
 
         /* BỘ LỌC CATEGORY & TÌM KIẾM */
-        let activeCategory = 'excel2019';
+        let activeCategory = 'all';
         function filterCategory(cat, btn) {
             activeCategory = cat;
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
