@@ -186,12 +186,9 @@
         }
 
         @keyframes goldShine {
-            to {
-                background-position: 200% center;
-            }
+            to { background-position: 200% center; }
         }
 
-        /* Fire flame effect for Light Mode */
         body.light-mode .gold-author {
             background: linear-gradient(135deg, #FF6B6B 0%, #FF8787 30%, #FFB74D 60%, #FF6B6B 100%);
             background-size: 200% auto;
@@ -614,7 +611,6 @@
             padding: 10px;
         }
 
-        /* --- TÙY CHỈNH THANH CUỘN (SCROLLBAR) CYBERPUNK NEON --- */
         .playlist-items-list::-webkit-scrollbar {
             width: 8px;
         }
@@ -645,7 +641,6 @@
             box-shadow: 0 0 15px var(--primary-neon), 0 0 20px var(--secondary-neon);
         }
 
-        /* Hỗ trợ cho Firefox */
         .playlist-items-list {
             scrollbar-width: thin;
             scrollbar-color: var(--primary-neon) rgba(15, 23, 42, 0.8);
@@ -819,7 +814,7 @@
             border-radius: 50%;
             background: #00ffcc;
             box-shadow: 0 0 8px #00ffcc;
-            transition: transform 0.05s ease-out; /* Giúp mắt chuyển động mượt mà hơn */
+            transition: transform 0.05s ease-out;
         }
 
         .hng-bot-eye.left { left: 18px; }
@@ -860,6 +855,7 @@
             letter-spacing: .5px;
         }
 
+        /* TAY ROBOT TỰ NHIÊN */
         .hng-bot-arm {
             position: absolute;
             top: 79px;
@@ -868,10 +864,31 @@
             border-radius: 10px;
             background: linear-gradient(180deg, #dbeafe, #8eefff);
             border: 1px solid #65dfff;
+            transform-origin: top center; /* Đặt tâm xoay ở khớp vai */
+            transition: transform 0.2s ease;
         }
 
         .hng-bot-arm.left { left: 10px; transform: rotate(18deg); }
         .hng-bot-arm.right { right: 10px; transform: rotate(-18deg); }
+
+        /* ANIMATION VẪY TAY HOẢNG HỐT KHI NÉ CHUỘT */
+        .hng-waving .hng-bot-arm.left {
+            animation: hngWaveArmLeft 0.12s infinite alternate ease-in-out;
+        }
+
+        .hng-waving .hng-bot-arm.right {
+            animation: hngWaveArmRight 0.12s infinite alternate ease-in-out;
+        }
+
+        @keyframes hngWaveArmLeft {
+            0% { transform: rotate(-30deg) translateY(-3px); }
+            100% { transform: rotate(110deg) translateY(-1px); }
+        }
+
+        @keyframes hngWaveArmRight {
+            0% { transform: rotate(30deg) translateY(-3px); }
+            100% { transform: rotate(-110deg) translateY(-1px); }
+        }
 
         .hng-bot-bubble {
             position: relative;
@@ -1097,7 +1114,6 @@
             
             body.classList.toggle('light-mode');
             
-            // Save preference to localStorage
             if (body.classList.contains('light-mode')) {
                 localStorage.setItem('theme', 'light');
                 themeIcon.textContent = '☀️';
@@ -1107,7 +1123,6 @@
             }
         }
 
-        // Load saved theme preference
         window.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('theme') || 'dark';
             const themeIcon = document.getElementById('themeIcon');
@@ -1125,7 +1140,6 @@
                 albumTitle: "Bộ Bài Giải EXCEL 2019 và FILE Đề",
                 fileUrl: "https://drive.google.com/drive/folders/1sH6fJbJ1vO29k2zXGgTj5-84Jndc6a9v",
                 videos: [
-                    // EXAM 1
                     { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 1", youtubeId: "zNF2f2oJ8ZE", duration: "10:15" },
                     { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 2", youtubeId: "lkyTJakc254", duration: "08:40" },
                     { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 3", youtubeId: "BsIbiqj7l4M", duration: "12:05" },
@@ -1133,8 +1147,6 @@
                     { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 5", youtubeId: "1iO64evzNQ0", duration: "09:15" },
                     { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 6", youtubeId: "3llvysoZoHE", duration: "11:20" },
                     { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 7", youtubeId: "-I0kv5XW_AY", duration: "07:50" },
-                    
-                    // EXAM 2
                     { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 1", youtubeId: "-Wg8XZrtj4w", duration: "10:45" },
                     { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 2", youtubeId: "2PQXi2b6kWs", duration: "08:15" },
                     { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 3", youtubeId: "96l1nthCBqI", duration: "11:30" },
@@ -1197,7 +1209,6 @@
 
         let currentAlbumIndex = 0;
 
-        // Open Playlist Modal
         function openPlaylist(albumIdx) {
             currentAlbumIndex = albumIdx;
             const album = albumsData[albumIdx];
@@ -1228,7 +1239,6 @@
             document.getElementById('playlistModal').style.display = 'flex';
         }
 
-        // Select Video inside Modal
         function selectVideo(videoIdx) {
             const album = albumsData[currentAlbumIndex];
             const vid = album.videos[videoIdx];
@@ -1243,13 +1253,11 @@
             });
         }
 
-        // Close Modal
         function closePlaylist() {
             document.getElementById('mainIframe').src = '';
             document.getElementById('playlistModal').style.display = 'none';
         }
 
-        // Filter Categories & Search
         let activeCategory = 'all';
         function filterCategory(cat, btn) {
             activeCategory = cat;
@@ -1313,21 +1321,20 @@
 
         setInterval(changeHngBotMessage, 15000);
 
-        // Xử lý sự kiện di chuyển chuột: Mắt xoay theo chuột + Né chuột khi tới gần
         document.addEventListener('mousemove', function(e) {
             const now = Date.now();
             const rect = hngBotCharacter.getBoundingClientRect();
             const cx = rect.left + rect.width / 2;
             const cy = rect.top + rect.height / 2;
 
-            // 1. HIỆU ỨNG MẮT THEO DÕI CHUỘT
+            // 1. MẮT THEO CHUỘT
             hngEyes.forEach(eye => {
                 const eyeRect = eye.getBoundingClientRect();
                 const eyeCx = eyeRect.left + eyeRect.width / 2;
                 const eyeCy = eyeRect.top + eyeRect.height / 2;
 
                 const angle = Math.atan2(e.clientY - eyeCy, e.clientX - eyeCx);
-                const maxDistance = 4; // Khoảng cách tối đa mắt dịch chuyển (px)
+                const maxDistance = 4;
                 const distance = Math.min(maxDistance, Math.hypot(e.clientX - eyeCx, e.clientY - eyeCy) / 10);
 
                 const eyeX = Math.cos(angle) * distance;
@@ -1336,7 +1343,7 @@
                 eye.style.transform = `translate(${eyeX}px, ${eyeY}px)`;
             });
 
-            // 2. HIỆU ỨNG NÉ CHUỘT KHI TỚI GẦN
+            // 2. NÉ CHUỘT + VÙNG VẪY CÁNH TAY
             if (now - hngBotLastEscape < 850) return;
 
             const distToBot = Math.hypot(e.clientX - cx, e.clientY - cy);
@@ -1346,6 +1353,8 @@
 
                 const moveRight = e.clientX < cx;
                 
+                // Thêm class vẫy tay vùng vẫy
+                hngBotCharacter.classList.add('hng-waving');
                 hngBotCharacter.classList.remove('hng-run-right', 'hng-run-left');
                 void hngBotCharacter.offsetWidth;
                 hngBotCharacter.classList.add(moveRight ? 'hng-run-right' : 'hng-run-left');
@@ -1353,8 +1362,10 @@
                 const offset = moveRight ? 60 : -60;
                 hngBotCharacter.style.transform = `translateX(${offset}px)`;
 
+                // Hết thời gian né thì ngưng vùng vẫy tay
                 setTimeout(() => {
                     hngBotCharacter.style.transform = 'translateX(0px)';
+                    hngBotCharacter.classList.remove('hng-waving');
                 }, 800);
 
                 const escapeMessages = [
@@ -1372,7 +1383,6 @@
             }
         });
 
-        // Trả mắt về vị trí ban đầu khi chuột rời khỏi màn hình
         document.addEventListener('mouseleave', function() {
             hngEyes.forEach(eye => {
                 eye.style.transform = 'translate(0px, 0px)';
