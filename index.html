@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNG ACADEMY | Trung Tâm Học Tập & Thủ Thuật Công Nghệ</title>
+    <title>HNG ACADEMY | Hướng Dẫn & Giải Bài Tập Excel 2019</title>
     <!-- Fonts Gaming / Modern -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -175,7 +175,6 @@
             flex-direction: column;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            cursor: pointer;
         }
 
         .video-card::before {
@@ -205,6 +204,7 @@
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
             overflow: hidden;
             background: #000;
+            cursor: pointer;
         }
 
         .thumb-box img {
@@ -308,6 +308,7 @@
             text-decoration: none;
             box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .btn-watch:hover {
@@ -321,14 +322,17 @@
             color: var(--secondary-neon);
             font-weight: 700;
             border-radius: 8px;
-            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s ease;
         }
 
         .btn-doc:hover {
             background: var(--secondary-neon);
             color: #fff;
-            box-shadow: 0 0 15px rgba(ff, 0, 127, 0.6);
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
         }
 
         /* MODAL PHÁT VIDEO YOUTUBE */
@@ -378,85 +382,6 @@
             cursor: pointer;
             font-weight: bold;
         }
-
-        /* MODAL VƯỢT LINK UNLOCK TÀI LIỆU */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1001;
-            padding: 20px;
-        }
-
-        .card-panel {
-            font-family: 'Orbitron', sans-serif;
-            background: #0b0f19;
-            border: 1px solid var(--primary-neon);
-            border-radius: 16px;
-            padding: 28px;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 0 35px rgba(0, 255, 204, 0.4);
-            position: relative;
-        }
-
-        .task-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin: 20px 0;
-        }
-
-        .task-item {
-            background: #090d16;
-            border: 1px solid var(--primary-neon);
-            border-radius: 10px;
-            padding: 14px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .task-item:hover {
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .hexagon-check {
-            width: 26px; height: 26px;
-            background: var(--primary-neon);
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            display: flex; align-items: center; justify-content: center;
-            color: #000; font-weight: bold;
-        }
-        .hexagon-check.pending { background: #1e293b; color: #64748b; }
-
-        .btn-claim {
-            width: 100%;
-            padding: 16px;
-            background: #3b3564;
-            color: #8b85b1;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 8px;
-            cursor: not-allowed;
-            transition: all 0.3s ease;
-        }
-
-        .btn-claim.ready {
-            background: linear-gradient(135deg, #a855f7, #7c3aed);
-            color: #ffffff;
-            cursor: pointer;
-            box-shadow: 0 0 25px rgba(168, 85, 247, 0.8);
-        }
     </style>
 </head>
 <body>
@@ -471,16 +396,17 @@
         <!-- Header Section -->
         <header>
             <h1 class="brand-title">HNG ACADEMY</h1>
-            <p class="brand-subtitle">Kho Video Hướng Dẫn Học Tập, Lập Trình & Thủ Thuật Đỉnh Cao</p>
+            <p class="brand-subtitle">Kho Video Hướng Dẫn Học Tập & Giải Bài Tập Excel Miễn Phí</p>
         </header>
 
         <!-- Filter & Search Section -->
         <div class="filter-section">
             <div class="search-box">
-                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm kiếm bài học hoặc thủ thuật..." onkeyup="filterVideos()">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm bài giải Excel, hàm VLOOKUP, IF, PivotTable..." onkeyup="filterVideos()">
             </div>
             <div class="category-tabs">
-                <button class="tab-btn active" onclick="filterCategory('all', this)">Tất Cả</button>
+                <button class="tab-btn active" onclick="filterCategory('excel2019', this)">📊 Giải EXCEL 2019</button>
+                <button class="tab-btn" onclick="filterCategory('all', this)">Tất Cả</button>
                 <button class="tab-btn" onclick="filterCategory('study', this)">Mẹo Học Tập</button>
                 <button class="tab-btn" onclick="filterCategory('code', this)">Lập Trình & Web</button>
                 <button class="tab-btn" onclick="filterCategory('ai', this)">Công Cụ AI</button>
@@ -491,7 +417,58 @@
         <!-- Video Grid Container -->
         <div class="video-grid" id="videoContainer">
 
-            <!-- BÀI HỌC 1 -->
+            <!-- BÀI HỌC EXCEL 1 -->
+            <div class="video-card" data-category="excel2019" data-title="giải bài tập excel 2019 cơ bản đến nâng cao hàm vlookup hlookup if">
+                <div class="thumb-box" onclick="openPlayer('VsbCyOtNt7s')">
+                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
+                    <div class="badge-cat">Giải EXCEL 2019</div>
+                    <div class="play-btn-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <h3 class="video-title">Giải Bài Tập Excel 2019: Kết Hợp Hàm IF & VLOOKUP</h3>
+                    <p class="video-desc">Hướng dẫn chi tiết cách tính bảng lương, thưởng và tra cứu dữ liệu cực nhanh trong Excel 2019.</p>
+                    <div class="card-actions">
+                        <a class="btn-watch" onclick="openPlayer('VsbCyOtNt7s')">Xem Bài Giải</a>
+                        <a class="btn-doc" href="https://drive.google.com" target="_blank">Tải File Excel</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÀI HỌC EXCEL 2 -->
+            <div class="video-card" data-category="excel2019" data-title="hướng dẫn tạo pivottable báo cáo tự động excel 2019">
+                <div class="thumb-box" onclick="openPlayer('VsbCyOtNt7s')">
+                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
+                    <div class="badge-cat">Giải EXCEL 2019</div>
+                    <div class="play-btn-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <h3 class="video-title">Tạo Báo Cáo Tự Động Với PivotTable Trong Excel 2019</h3>
+                    <p class="video-desc">Cách tổng hợp dữ liệu doanh thu, bán hàng siêu dễ chỉ với vài cú click chuột.</p>
+                    <div class="card-actions">
+                        <a class="btn-watch" onclick="openPlayer('VsbCyOtNt7s')">Xem Bài Giải</a>
+                        <a class="btn-doc" href="https://drive.google.com" target="_blank">Tải File Excel</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÀI HỌC EXCEL 3 -->
+            <div class="video-card" data-category="excel2019" data-title="giải đề thi tin học văn phòng excel 2019 tổng hợp sumif countif">
+                <div class="thumb-box" onclick="openPlayer('VsbCyOtNt7s')">
+                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
+                    <div class="badge-cat">Giải EXCEL 2019</div>
+                    <div class="play-btn-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <h3 class="video-title">Giải Đề Thi Thực Hành Excel 2019 (Hàm SUMIF & COUNTIF)</h3>
+                    <p class="video-desc">Tổng hợp các dạng bài tập thực tế hay xuất hiện trong các đề thi chứng chỉ tin học văn phòng.</p>
+                    <div class="card-actions">
+                        <a class="btn-watch" onclick="openPlayer('VsbCyOtNt7s')">Xem Bài Giải</a>
+                        <a class="btn-doc" href="https://drive.google.com" target="_blank">Tải Đề Bài</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÀI HỌC KHÁC: MẸO HỌC TẬP -->
             <div class="video-card" data-category="study" data-title="cách quản lý thời gian học tập hiệu quả">
                 <div class="thumb-box" onclick="openPlayer('VsbCyOtNt7s')">
                     <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
@@ -503,58 +480,7 @@
                     <p class="video-desc">Hướng dẫn cách chia nhỏ thời gian học giúp ghi nhớ lâu và không bị mệt mỏi.</p>
                     <div class="card-actions">
                         <a class="btn-watch" onclick="openPlayer('VsbCyOtNt7s')">Xem Bài Học</a>
-                        <button class="btn-doc" onclick="openUnlockModal('https://drive.google.com')">Tài Liệu</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- BÀI HỌC 2 -->
-            <div class="video-card" data-category="code" data-title="tạo website miễn phí bằng github pages">
-                <div class="thumb-box" onclick="openPlayer('VsbCyOtNt7s')">
-                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
-                    <div class="badge-cat">Lập Trình & Web</div>
-                    <div class="play-btn-overlay"></div>
-                </div>
-                <div class="card-body">
-                    <h3 class="video-title">Cách Làm Website & Đưa Lên GitHub Pages Miễn Phí</h3>
-                    <p class="video-desc">Tự tay làm trang web cá nhân và đưa lên mạng cho bạn bè xem hoàn toàn free.</p>
-                    <div class="card-actions">
-                        <a class="btn-watch" onclick="openPlayer('VsbCyOtNt7s')">Xem Bài Học</a>
-                        <button class="btn-doc" onclick="openUnlockModal('https://github.com')">Code Mẫu</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- BÀI HỌC 3 -->
-            <div class="video-card" data-category="ai" data-title="sử dụng chatgpt hỗ trợ học tập">
-                <div class="thumb-box" onclick="openPlayer('VsbCyOtNt7s')">
-                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
-                    <div class="badge-cat">Công Cụ AI</div>
-                    <div class="play-btn-overlay"></div>
-                </div>
-                <div class="card-body">
-                    <h3 class="video-title">Top 5 Prompt AI Giúp Bạn Giải Bài Tập Trong 5 Giây</h3>
-                    <p class="video-desc">Tận dụng AI để viết văn, giải toán và tóm tắt sách cực kỳ hiệu quả.</p>
-                    <div class="card-actions">
-                        <a class="btn-watch" onclick="openPlayer('VsbCyOtNt7s')">Xem Bài Học</a>
-                        <button class="btn-doc" onclick="openUnlockModal('https://chatgpt.com')">Prompt AI</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- BÀI HỌC 4 -->
-            <div class="video-card" data-category="pc" data-title="tăng tốc máy tính ram 4gb mượt mà">
-                <div class="thumb-box" onclick="openPlayer('VsbCyOtNt7s')">
-                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail">
-                    <div class="badge-cat">Thủ Thuật Máy Tính</div>
-                    <div class="play-btn-overlay"></div>
-                </div>
-                <div class="card-body">
-                    <h3 class="video-title">Tối Ưu Win 10/11 Cho Máy Yếu 4GB RAM Chạy Siêu Nhanh</h3>
-                    <p class="video-desc">Mẹo dọn rác, tắt ứng dụng ngầm giúp máy chạy mượt khi học và giải trí.</p>
-                    <div class="card-actions">
-                        <a class="btn-watch" onclick="openPlayer('VsbCyOtNt7s')">Xem Bài Học</a>
-                        <button class="btn-doc" onclick="openUnlockModal('https://discord.com')">Tool Tối Ưu</button>
+                        <a class="btn-doc" href="https://drive.google.com" target="_blank">Tài Liệu</a>
                     </div>
                 </div>
             </div>
@@ -569,40 +495,6 @@
             <div class="iframe-container">
                 <iframe id="youtubeIframe" src="" allowfullscreen></iframe>
             </div>
-        </div>
-    </div>
-
-    <!-- MODAL VƯỢT LINK TẢI TÀI LIỆU -->
-    <div class="modal-overlay" id="unlockModal">
-        <div class="card-panel">
-            <span style="position:absolute; top:12px; right:16px; cursor:pointer; color:#fff;" onclick="closeUnlockModal()">&times;</span>
-            <h3 style="color:#00ffcc; text-align:center;">Nhiệm Vụ Mở Khóa Tài Liệu</h3>
-            
-            <div class="task-list">
-                <div class="task-item" onclick="startTask(1, 'https://youtu.be/VsbCyOtNt7s')">
-                    <div style="display:flex; align-items:center; gap:10px;">
-                        <span>📺</span>
-                        <div>
-                            <h5 style="color:#fff;">ĐĂNG KÝ KÊNH YOUTUBE</h5>
-                            <small id="timer-1" style="color:#64748b;">~40s</small>
-                        </div>
-                    </div>
-                    <div class="hexagon-check pending" id="check-1">✓</div>
-                </div>
-
-                <div class="task-item" onclick="startTask(2, 'https://facebook.com/NguyenThanhHoai252011/')">
-                    <div style="display:flex; align-items:center; gap:10px;">
-                        <span>🌐</span>
-                        <div>
-                            <h5 style="color:#fff;">FOLLOW ADMIN</h5>
-                            <small id="timer-2" style="color:#64748b;">~40s</small>
-                        </div>
-                    </div>
-                    <div class="hexagon-check pending" id="check-2">✓</div>
-                </div>
-            </div>
-
-            <button class="btn-claim" id="claimBtn" onclick="claimReward()">🔒 NHẬN LINK TÀI LIỆU</button>
         </div>
     </div>
 
@@ -658,7 +550,7 @@
         drawParticles();
 
         /* === BỘ LỌC TÌM KIẾM & CATEGORY === */
-        let activeCategory = 'all';
+        let activeCategory = 'excel2019'; // Mặc định hiển thị mục Giải EXCEL 2019
 
         function filterCategory(cat, btn) {
             activeCategory = cat;
@@ -697,82 +589,8 @@
             document.getElementById('videoModal').style.display = 'none';
         }
 
-        /* === UNLOCK TASK LOGIC CHỐNG GIAN LẬN (<15s, TIMEOUT 3P) === */
-        let targetDocUrl = '';
-        let task1Done = false, task2Done = false;
-        let activeTask = 0, taskStartTime = 0;
-        let autoResetTimeout = null;
-
-        function openUnlockModal(url) {
-            targetDocUrl = url;
-            resetTasks();
-            document.getElementById('unlockModal').style.display = 'flex';
-            autoResetTimeout = setTimeout(() => {
-                resetTasks();
-                alert("Hết thời gian (3 phút)! Nhiệm vụ đã reset.");
-            }, 180000);
-        }
-
-        function closeUnlockModal() {
-            document.getElementById('unlockModal').style.display = 'none';
-            resetTasks();
-        }
-
-        function resetTasks() {
-            task1Done = false; task2Done = false; activeTask = 0;
-            if(autoResetTimeout) clearTimeout(autoResetTimeout);
-            document.getElementById('check-1').classList.add('pending');
-            document.getElementById('check-2').classList.add('pending');
-            document.getElementById('timer-1').innerText = "~40s";
-            document.getElementById('timer-2').innerText = "~40s";
-            const claimBtn = document.getElementById('claimBtn');
-            claimBtn.classList.remove('ready');
-            claimBtn.innerText = "🔒 NHẬN LINK TÀI LIỆU";
-        }
-
-        function startTask(taskNum, url) {
-            if((taskNum === 1 && task1Done) || (taskNum === 2 && task2Done)) return;
-            activeTask = taskNum;
-            taskStartTime = Date.now();
-            window.open(url, '_blank');
-
-            let timeLeft = 40;
-            let timer = setInterval(() => {
-                timeLeft--;
-                document.getElementById(`timer-${taskNum}`).innerText = `Đợi... ${timeLeft}s`;
-                if(timeLeft <= 0) {
-                    clearInterval(timer);
-                    document.getElementById(`timer-${taskNum}`).innerText = "Hoàn thành!";
-                    document.getElementById(`check-${taskNum}`).classList.remove('pending');
-                    if(taskNum === 1) task1Done = true;
-                    if(taskNum === 2) task2Done = true;
-                    activeTask = 0;
-                    if(task1Done && task2Done) {
-                        const claimBtn = document.getElementById('claimBtn');
-                        claimBtn.classList.add('ready');
-                        claimBtn.innerText = "🔓 MỞ KHÓA TÀI LIỆU NOW";
-                    }
-                }
-            }, 1000);
-        }
-
-        /* Anti-cheat: Quay lại dưới 15 giây */
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden && activeTask !== 0) {
-                let spentSec = (Date.now() - taskStartTime) / 1000;
-                if (spentSec < 15) {
-                    alert("⚠️ CẢNH BÁO: Bạn quay lại trang quá nhanh (<15s) chưa thực hiện đủ thao tác! Nhiệm vụ bị reset.");
-                    resetTasks();
-                }
-            }
-        });
-
-        function claimReward() {
-            if(task1Done && task2Done) {
-                window.open(targetDocUrl, '_blank');
-                closeUnlockModal();
-            }
-        }
+        // Chạy bộ lọc ban đầu để ưu tiên danh mục Giải EXCEL 2019
+        filterVideos();
     </script>
 </body>
 </html>
