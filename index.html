@@ -806,6 +806,34 @@
             box-shadow: inset 0 0 14px rgba(0,255,204,.08);
         }
 
+        /* ===== MÁ HỒNG CUTE ===== */
+        .hng-bot-face::before,
+        .hng-bot-face::after {
+            content: "";
+            position: absolute;
+            top: 24px;
+            width: 9px;
+            height: 5px;
+            background: #ff5e97;
+            border-radius: 50%;
+            opacity: 0.35;
+            filter: blur(0.6px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 6px #ff5e97;
+        }
+
+        .hng-bot-face::before { left: 9px; }
+        .hng-bot-face::after { right: 9px; }
+
+        /* KHI BẬT TÍNH NĂNG NÉ CHUỘT -> MÁ HỒNG ĐẬM LÊN VÀ PHỒNG CUTE */
+        .hng-waving .hng-bot-face::before,
+        .hng-waving .hng-bot-face::after {
+            opacity: 1;
+            transform: scale(1.3);
+            background: #ff2a75;
+            box-shadow: 0 0 10px #ff2a75;
+        }
+
         .hng-bot-eye {
             position: absolute;
             top: 20px;
@@ -864,7 +892,7 @@
             border-radius: 10px;
             background: linear-gradient(180deg, #dbeafe, #8eefff);
             border: 1px solid #65dfff;
-            transform-origin: top center; /* Đặt tâm xoay ở khớp vai */
+            transform-origin: top center;
             transition: transform 0.2s ease;
         }
 
@@ -1343,7 +1371,7 @@
                 eye.style.transform = `translate(${eyeX}px, ${eyeY}px)`;
             });
 
-            // 2. NÉ CHUỘT + VÙNG VẪY CÁNH TAY
+            // 2. NÉ CHUỘT + VÙNG VẪY CÁNH TAY & MÁ HỒNG HẠO HẠO
             if (now - hngBotLastEscape < 850) return;
 
             const distToBot = Math.hypot(e.clientX - cx, e.clientY - cy);
@@ -1353,7 +1381,7 @@
 
                 const moveRight = e.clientX < cx;
                 
-                // Thêm class vẫy tay vùng vẫy
+                // Thêm class kích hoạt vẫy tay + má hồng
                 hngBotCharacter.classList.add('hng-waving');
                 hngBotCharacter.classList.remove('hng-run-right', 'hng-run-left');
                 void hngBotCharacter.offsetWidth;
@@ -1362,17 +1390,17 @@
                 const offset = moveRight ? 60 : -60;
                 hngBotCharacter.style.transform = `translateX(${offset}px)`;
 
-                // Hết thời gian né thì ngưng vùng vẫy tay
+                // Hết thời gian né thì ngưng vẫy tay và má hồng trở lại bình thường
                 setTimeout(() => {
                     hngBotCharacter.style.transform = 'translateX(0px)';
                     hngBotCharacter.classList.remove('hng-waving');
                 }, 800);
 
                 const escapeMessages = [
-                    "Ê ê, đừng bắt tuiii! 😂",
-                    "Haha, bắt được tui đi! 🤖💨",
-                    "Né một chút thôi nha! 😆",
-                    "Aaaa! Chuột tới kìa! 🏃‍♂️💨"
+                    "Ê ê, ngại quá à! Đừng bắt tuiii! 😳💕",
+                    "Haha, ngượng quá nè! Né thui! 🙈💨",
+                    "Aaaa! Chuột tới gần làm tui ngại! 💖",
+                    "Né một chút nha, bắt hổng được đâu! 😳✨"
                 ];
                 hngBotBubble.textContent =
                     escapeMessages[Math.floor(Math.random() * escapeMessages.length)];
