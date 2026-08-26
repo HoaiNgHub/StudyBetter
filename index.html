@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Dark Mode */
             --bg-color: #030712;
             --card-bg: rgba(15, 23, 42, 0.75);
             --primary-neon: #00ffcc;
@@ -15,6 +16,26 @@
             --accent-purple: #9d4edd;
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
+            
+            /* Light Mode */
+            --light-bg: linear-gradient(135deg, #E8F4F8 0%, #FFF5E6 100%);
+            --light-card-bg: rgba(255, 255, 255, 0.85);
+            --light-primary: #06B6D4;
+            --light-secondary: #FF6B6B;
+            --light-tertiary: #A78BFA;
+            --light-text-main: #1E293B;
+            --light-text-sub: #64748B;
+            --light-border: rgba(6, 182, 212, 0.2);
+        }
+
+        body.light-mode {
+            --bg-color: #F8FAFC;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --primary-neon: #06B6D4;
+            --secondary-neon: #FF6B6B;
+            --accent-purple: #A78BFA;
+            --text-main: #1E293B;
+            --text-sub: #64748B;
         }
 
         * {
@@ -30,6 +51,53 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s ease;
+        }
+
+        body.light-mode {
+            background: linear-gradient(135deg, #E8F4F8 0%, #FFF5E6 100%);
+        }
+
+        /* ===== THEME TOGGLE BUTTON ===== */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
+            border: 2px solid var(--primary-neon);
+            color: #000;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.1) rotate(20deg);
+            box-shadow: 0 0 35px rgba(0, 255, 204, 0.8), 0 0 50px rgba(255, 0, 127, 0.5);
+        }
+
+        .theme-toggle-btn:active {
+            transform: scale(0.95) rotate(20deg);
+        }
+
+        body.light-mode .theme-toggle-btn {
+            background: linear-gradient(135deg, #06B6D4, #A78BFA);
+            border-color: #06B6D4;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+            color: #fff;
+        }
+
+        body.light-mode .theme-toggle-btn:hover {
+            box-shadow: 0 0 35px rgba(6, 182, 212, 0.8), 0 0 50px rgba(167, 139, 250, 0.5);
         }
 
         #particle-canvas {
@@ -50,6 +118,10 @@
         }
         .glow-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: var(--secondary-neon); }
         .glow-2 { bottom: -10%; right: -10%; width: 600px; height: 600px; background: var(--primary-neon); }
+
+        body.light-mode .glow-sphere {
+            opacity: 0.15;
+        }
 
         @keyframes floatGlow {
             0% { transform: scale(1) translate(0, 0); }
@@ -79,6 +151,14 @@
             text-shadow: 0 0 30px rgba(0, 255, 204, 0.4);
             letter-spacing: 2px;
             text-transform: uppercase;
+            transition: all 0.6s ease;
+        }
+
+        body.light-mode .brand-title {
+            background: linear-gradient(135deg, #06B6D4 0%, #A78BFA 50%, #FF6B6B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
         }
 
         .brand-subtitle {
@@ -86,6 +166,7 @@
             font-size: 1.15rem;
             color: var(--text-sub);
             font-weight: 500;
+            transition: color 0.6s ease;
         }
 
         /* Hiệu ứng chữ vàng kim lấp lánh */
@@ -98,6 +179,12 @@
             text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
             animation: goldShine 4s linear infinite;
             display: inline-block;
+            transition: all 0.6s ease;
+        }
+
+        body.light-mode .gold-author {
+            background: linear-gradient(135deg, #FF6B6B 0%, #A78BFA 40%, #06B6D4 50%, #A78BFA 60%, #FF6B6B 100%);
+            text-shadow: 0 0 8px rgba(255, 107, 107, 0.4);
         }
 
         @keyframes goldShine {
@@ -134,9 +221,24 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
         }
 
+        body.light-mode .search-input {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(6, 182, 212, 0.4);
+            color: #1E293B;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+        }
+
+        body.light-mode .search-input::placeholder {
+            color: #94a3b8;
+        }
+
         .search-input:focus {
             border-color: var(--primary-neon);
             box-shadow: 0 0 25px rgba(0, 255, 204, 0.5);
+        }
+
+        body.light-mode .search-input:focus {
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.5);
         }
 
         .category-tabs {
@@ -158,12 +260,22 @@
             transition: all 0.3s ease;
         }
 
+        body.light-mode .tab-btn {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            color: #64748B;
+        }
+
         .tab-btn:hover, .tab-btn.active {
             color: #000;
             background: var(--primary-neon);
             border-color: var(--primary-neon);
             box-shadow: 0 0 20px rgba(0, 255, 204, 0.6);
             transform: translateY(-2px);
+        }
+
+        body.light-mode .tab-btn.active {
+            color: #fff;
         }
 
         .video-grid {
@@ -185,9 +297,19 @@
             cursor: pointer;
         }
 
+        body.light-mode .video-card {
+            border: 2px solid rgba(6, 182, 212, 0.2);
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.1);
+        }
+
         .video-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 15px 35px rgba(0, 255, 204, 0.25);
+            border-color: var(--primary-neon);
+        }
+
+        body.light-mode .video-card:hover {
+            box-shadow: 0 15px 35px rgba(6, 182, 212, 0.3), 0 0 30px rgba(167, 139, 250, 0.15);
             border-color: var(--primary-neon);
         }
 
@@ -197,6 +319,10 @@
             padding-top: 56.25%;
             overflow: hidden;
             background: #000;
+        }
+
+        body.light-mode .thumb-box {
+            background: #E0E7FF;
         }
 
         .thumb-box img {
@@ -222,6 +348,12 @@
             font-weight: 700;
         }
 
+        body.light-mode .playlist-count-badge {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: #06B6D4;
+            color: #06B6D4;
+        }
+
         .badge-cat {
             position: absolute;
             top: 12px; left: 12px;
@@ -234,9 +366,20 @@
             font-weight: 700;
         }
 
+        body.light-mode .badge-cat {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: #06B6D4;
+            color: #06B6D4;
+        }
+
         .badge-word {
             border-color: #00b8ff;
             color: #00b8ff;
+        }
+
+        body.light-mode .badge-word {
+            border-color: #FF6B6B;
+            color: #FF6B6B;
         }
 
         .card-body {
@@ -252,6 +395,11 @@
             color: #fff;
             margin-bottom: 8px;
             line-height: 1.4;
+            transition: color 0.6s ease;
+        }
+
+        body.light-mode .video-title {
+            color: #1E293B;
         }
 
         .video-desc {
@@ -259,6 +407,7 @@
             color: var(--text-sub);
             margin-bottom: 16px;
             line-height: 1.5;
+            transition: color 0.6s ease;
         }
 
         .btn-open-album {
@@ -276,8 +425,18 @@
             margin-top: auto;
         }
 
+        body.light-mode .btn-open-album {
+            background: linear-gradient(135deg, #06B6D4, #A78BFA);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+
         .btn-open-album:hover {
             box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
+        }
+
+        body.light-mode .btn-open-album:hover {
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.8), 0 0 15px rgba(167, 139, 250, 0.5);
         }
 
         .modal-player {
@@ -292,6 +451,11 @@
             padding: 20px;
         }
 
+        body.light-mode .modal-player {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+        }
+
         .playlist-layout {
             width: 100%;
             max-width: 1100px;
@@ -303,6 +467,13 @@
             overflow: hidden;
             box-shadow: 0 0 50px rgba(0, 255, 204, 0.3);
             position: relative;
+            transition: all 0.6s ease;
+        }
+
+        body.light-mode .playlist-layout {
+            background: #fff;
+            border-color: #06B6D4;
+            box-shadow: 0 0 50px rgba(6, 182, 212, 0.2);
         }
 
         .main-video-area {
@@ -312,10 +483,18 @@
             background: #000;
         }
 
+        body.light-mode .main-video-area {
+            background: #F8FAFC;
+        }
+
         .video-frame-container {
             width: 100%;
             height: 70%;
             background: #000;
+        }
+
+        body.light-mode .video-frame-container {
+            background: #E8F4F8;
         }
 
         .video-frame-container iframe {
@@ -329,12 +508,22 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: background 0.6s ease;
+        }
+
+        body.light-mode .video-meta-box {
+            background: #F1F5F9;
         }
 
         .playing-title {
             color: #fff;
             font-size: 1.2rem;
             font-weight: 700;
+            transition: color 0.6s ease;
+        }
+
+        body.light-mode .playing-title {
+            color: #1E293B;
         }
 
         .btn-download-file {
@@ -352,6 +541,11 @@
             transition: all 0.3s ease;
         }
 
+        body.light-mode .btn-download-file {
+            background: linear-gradient(135deg, #FF6B6B, #FF8787);
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
+        }
+
         .btn-download-file:hover {
             box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
             transform: translateY(-2px);
@@ -363,6 +557,12 @@
             border-left: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
+            transition: background 0.6s ease, border-color 0.6s ease;
+        }
+
+        body.light-mode .playlist-sidebar {
+            background: #F8FAFC;
+            border-left-color: rgba(6, 182, 212, 0.2);
         }
 
         .playlist-header {
@@ -373,6 +573,13 @@
             font-weight: 700;
             font-size: 0.95rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.6s ease;
+        }
+
+        body.light-mode .playlist-header {
+            background: #E8F4F8;
+            color: #06B6D4;
+            border-bottom-color: rgba(6, 182, 212, 0.2);
         }
 
         .playlist-items-list {
@@ -392,10 +599,19 @@
             margin: 4px 0;
         }
 
+        body.light-mode .playlist-items-list::-webkit-scrollbar-track {
+            background: rgba(6, 182, 212, 0.1);
+        }
+
         .playlist-items-list::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, var(--primary-neon), var(--secondary-neon));
             border-radius: 10px;
             box-shadow: 0 0 10px var(--primary-neon);
+        }
+
+        body.light-mode .playlist-items-list::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #06B6D4, #A78BFA);
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
         }
 
         .playlist-items-list::-webkit-scrollbar-thumb:hover {
@@ -420,9 +636,17 @@
             background: rgba(255, 255, 255, 0.02);
         }
 
+        body.light-mode .playlist-item {
+            background: rgba(6, 182, 212, 0.08);
+        }
+
         .playlist-item:hover, .playlist-item.active {
             background: rgba(0, 255, 204, 0.15);
             border-left: 4px solid var(--primary-neon);
+        }
+
+        body.light-mode .playlist-item:hover, body.light-mode .playlist-item.active {
+            background: rgba(6, 182, 212, 0.25);
         }
 
         .playlist-item img {
@@ -443,12 +667,18 @@
             font-size: 0.85rem;
             font-weight: 600;
             line-height: 1.3;
+            transition: color 0.6s ease;
+        }
+
+        body.light-mode .playlist-item-title {
+            color: #1E293B;
         }
 
         .playlist-item-duration {
             color: var(--text-sub);
             font-size: 0.75rem;
             margin-top: 4px;
+            transition: color 0.6s ease;
         }
 
         .close-modal-btn {
@@ -458,9 +688,26 @@
             font-size: 2rem;
             cursor: pointer;
             z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .close-modal-btn {
+            color: #1E293B;
+        }
+
+        .close-modal-btn:hover {
+            transform: rotate(90deg) scale(1.2);
         }
 
         @media (max-width: 768px) {
+            .theme-toggle-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+                top: 15px;
+                right: 15px;
+            }
+
             .playlist-layout { flex-direction: column; height: 90vh; }
             .main-video-area { height: 50%; }
             .playlist-sidebar { height: 50%; }
@@ -468,6 +715,11 @@
     </style>
 </head>
 <body>
+
+    <!-- ===== THEME TOGGLE BUTTON ===== -->
+    <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        <span id="themeIcon">🌙</span>
+    </button>
 
     <div class="glow-sphere glow-1"></div>
     <div class="glow-sphere glow-2"></div>
@@ -547,6 +799,36 @@
     </div>
 
     <script>
+        // ===== THEME TOGGLE FUNCTION =====
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            body.classList.toggle('light-mode');
+            
+            // Save preference to localStorage
+            if (body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                themeIcon.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.textContent = '🌙';
+            }
+        }
+
+        // Load saved theme preference
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                themeIcon.textContent = '☀️';
+            } else {
+                themeIcon.textContent = '🌙';
+            }
+        });
+
         const albumsData = [
             {
                 albumTitle: "Bộ Bài Giải EXCEL 2019 và FILE Đề",
