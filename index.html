@@ -381,6 +381,34 @@
             padding: 10px;
         }
 
+        /* --- TÙY CHỈNH THANH CUỘN (SCROLLBAR) CYBERPUNK NEON --- */
+        .playlist-items-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .playlist-items-list::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 10px;
+            margin: 4px 0;
+        }
+
+        .playlist-items-list::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary-neon), var(--secondary-neon));
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--primary-neon);
+        }
+
+        .playlist-items-list::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #00ffff, #ff00a0);
+            box-shadow: 0 0 15px var(--primary-neon), 0 0 20px var(--secondary-neon);
+        }
+
+        /* Hỗ trợ cho Firefox */
+        .playlist-items-list {
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-neon) rgba(15, 23, 42, 0.8);
+        }
+
         .playlist-item {
             display: flex;
             gap: 12px;
