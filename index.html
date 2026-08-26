@@ -196,7 +196,7 @@
         }
 
         .video-card:hover .thumb-box img {
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
 
         /* Tag Số Lượng Video trong Album */
@@ -460,13 +460,14 @@
             </div>
         </div>
 
-        <!-- Danh sách Các Mục Lớn (Album Đề Thi) -->
+        <!-- Danh sách Các Mục Lớn -->
         <div class="video-grid" id="videoContainer">
 
             <!-- MỤC LỚN 1: BỘ BÀI GIẢI EXCEL 2019 VÀ FILE ĐỀ -->
             <div class="video-card" data-category="excel2019" data-title="bộ bài giải excel 2019 và file đề" onclick="openPlaylist(0)">
                 <div class="thumb-box">
-                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail Excel">
+                    <!-- ĐỔI ẢNH XEM TRƯỚC EXCEL -->
+                    <img src="thumb-excel.jpg" alt="MOS EXCEL 2019 EXAM 1 - PROJECT 1">
                     <div class="badge-cat">Giải EXCEL 2019</div>
                     <div class="playlist-count-badge">📑 5 Video Bài Giải</div>
                 </div>
@@ -480,7 +481,8 @@
             <!-- MỤC LỚN 2: BỘ BÀI GIẢI WORD 2019 VÀ FILE ĐỀ -->
             <div class="video-card" data-category="word2019" data-title="bộ bài giải word 2019 và file đề" onclick="openPlaylist(1)">
                 <div class="thumb-box">
-                    <img src="https://img.youtube.com/vi/VsbCyOtNt7s/hqdefault.jpg" alt="Thumbnail Word">
+                    <!-- ĐỔI ẢNH XEM TRƯỚC WORD -->
+                    <img src="thumb-word.jpg" alt="MOS WORD 2019 EXAM 1 - PROJECT 1">
                     <div class="badge-cat badge-word">Giải WORD 2019</div>
                     <div class="playlist-count-badge">📑 4 Video Bài Giải</div>
                 </div>
@@ -528,23 +530,23 @@
         const albumsData = [
             {
                 albumTitle: "Bộ Bài Giải EXCEL 2019 và FILE Đề",
-                fileUrl: "https://drive.google.com", // Link file đề Excel của bạn
+                fileUrl: "https://drive.google.com",
                 videos: [
-                    { title: "Bài 1: Giải Câu 1 & 2 - Dùng Hàm IF & VLOOKUP", youtubeId: "VsbCyOtNt7s", duration: "10:15" },
-                    { title: "Bài 2: Giải Câu 3 - Tính Bảng Lương & Thưởng", youtubeId: "VsbCyOtNt7s", duration: "08:40" },
-                    { title: "Bài 3: Giải Câu 4 - Thống Kê Bằng Hàm SUMIF", youtubeId: "VsbCyOtNt7s", duration: "12:05" },
-                    { title: "Bài 4: Giải Câu 5 - Đếm Dữ Liệu Với COUNTIF", youtubeId: "VsbCyOtNt7s", duration: "06:30" },
-                    { title: "Bài 5: Tổng Kết & Mẹo Điểm Tối Đa Khi Thi", youtubeId: "VsbCyOtNt7s", duration: "15:20" }
+                    { title: "MOS EXCEL 2019: EXAM 1 - PROJECT 1", youtubeId: "VsbCyOtNt7s", duration: "10:15", thumb: "thumb-excel.jpg" },
+                    { title: "Bài 2: Giải Câu 3 - Tính Bảng Lương & Thưởng", youtubeId: "VsbCyOtNt7s", duration: "08:40", thumb: "thumb-excel.jpg" },
+                    { title: "Bài 3: Giải Câu 4 - Thống Kê Bằng Hàm SUMIF", youtubeId: "VsbCyOtNt7s", duration: "12:05", thumb: "thumb-excel.jpg" },
+                    { title: "Bài 4: Giải Câu 5 - Đếm Dữ Liệu Với COUNTIF", youtubeId: "VsbCyOtNt7s", duration: "06:30", thumb: "thumb-excel.jpg" },
+                    { title: "Bài 5: Tổng Kết & Mẹo Điểm Tối Đa Khi Thi", youtubeId: "VsbCyOtNt7s", duration: "15:20", thumb: "thumb-excel.jpg" }
                 ]
             },
             {
                 albumTitle: "Bộ Bài Giải Word 2019 và FILE Đề",
-                fileUrl: "https://drive.google.com", // Link file đề Word của bạn
+                fileUrl: "https://drive.google.com",
                 videos: [
-                    { title: "Bài 1: Định Dạng Văn Bản & Định Dạng Tab", youtubeId: "VsbCyOtNt7s", duration: "09:30" },
-                    { title: "Bài 2: Chèn Bảng Table & Công Thức Tính", youtubeId: "VsbCyOtNt7s", duration: "11:15" },
-                    { title: "Bài 3: Tạo Mục Lục Tự Động Trong Word 2019", youtubeId: "VsbCyOtNt7s", duration: "07:45" },
-                    { title: "Bài 4: Trộn Thư Mail Merge Siêu Nhanh", youtubeId: "VsbCyOtNt7s", duration: "13:00" }
+                    { title: "MOS WORD 2019: EXAM 1 - PROJECT 1", youtubeId: "VsbCyOtNt7s", duration: "09:30", thumb: "thumb-word.jpg" },
+                    { title: "Bài 2: Chèn Bảng Table & Công Thức Tính", youtubeId: "VsbCyOtNt7s", duration: "11:15", thumb: "thumb-word.jpg" },
+                    { title: "Bài 3: Tạo Mục Lục Tự Động Trong Word 2019", youtubeId: "VsbCyOtNt7s", duration: "07:45", thumb: "thumb-word.jpg" },
+                    { title: "Bài 4: Trộn Thư Mail Merge Siêu Nhanh", youtubeId: "VsbCyOtNt7s", duration: "13:00", thumb: "thumb-word.jpg" }
                 ]
             }
         ];
@@ -607,7 +609,7 @@
                 item.className = `playlist-item ${vIdx === 0 ? 'active' : ''}`;
                 item.onclick = () => selectVideo(vIdx);
                 item.innerHTML = `
-                    <img src="https://img.youtube.com/vi/${vid.youtubeId}/hqdefault.jpg" alt="thumb">
+                    <img src="${vid.thumb}" alt="thumb">
                     <div class="playlist-item-info">
                         <div class="playlist-item-title">${vid.title}</div>
                         <div class="playlist-item-duration">⏱ ${vid.duration}</div>
