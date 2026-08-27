@@ -27,7 +27,6 @@
             --light-text-sub: #64748B;
             --light-border: rgba(6, 182, 212, 0.2);
         }
-
         body.light-mode {
             --bg-color: #F8FAFC;
             --card-bg: rgba(255, 255, 255, 0.85);
@@ -37,13 +36,11 @@
             --text-main: #1E293B;
             --text-sub: #64748B;
         }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
@@ -53,12 +50,10 @@
             position: relative;
             transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s ease;
         }
-
         body.light-mode {
             background: linear-gradient(135deg, #E8F4F8 0%, #FFF5E6 100%);
         }
-
-        /* ===== CONTAINER CHỨA NÚT Ở GÓC TRÊN BÊN PHẢI ===== */
+        /* ===== CONTAINER NÚT Ở GÓC TRÊN BÊN PHẢI ===== */
         .top-right-controls {
             position: fixed;
             top: 20px;
@@ -68,9 +63,8 @@
             gap: 12px;
             z-index: 999;
         }
-
-        /* ===== NÚT CHUNG (GÓP Ý & CHAT AI) ===== */
-        .feedback-toggle-btn, .ai-chat-toggle-btn {
+        /* ===== NÚT GÓP Ý ===== */
+        .feedback-toggle-btn {
             height: 60px;
             padding: 0 20px;
             border-radius: 30px;
@@ -88,32 +82,16 @@
             box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
             backdrop-filter: blur(10px);
         }
-
-        .ai-chat-toggle-btn {
-            background: linear-gradient(135deg, #00b8ff, var(--accent-purple));
-            border-color: #00b8ff;
-            color: #fff;
-            box-shadow: 0 0 20px rgba(0, 184, 255, 0.4);
-        }
-
-        .feedback-toggle-btn:hover, .ai-chat-toggle-btn:hover {
+        .feedback-toggle-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 0 35px rgba(0, 255, 204, 0.8), 0 0 50px rgba(255, 0, 127, 0.5);
         }
-
         body.light-mode .feedback-toggle-btn {
             background: linear-gradient(135deg, #06B6D4, #A78BFA);
             border-color: #06B6D4;
             color: #fff;
             box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
         }
-
-        body.light-mode .ai-chat-toggle-btn {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-color: #3b82f6;
-            color: #fff;
-        }
-
         /* ===== THEME TOGGLE BUTTON ===== */
         .theme-toggle-btn {
             width: 60px;
@@ -131,188 +109,16 @@
             box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
             backdrop-filter: blur(10px);
         }
-
         .theme-toggle-btn:hover {
             transform: scale(1.1) rotate(20deg);
             box-shadow: 0 0 35px rgba(0, 255, 204, 0.8), 0 0 50px rgba(255, 0, 127, 0.5);
         }
-
         body.light-mode .theme-toggle-btn {
             background: linear-gradient(135deg, #06B6D4, #A78BFA);
             border-color: #06B6D4;
             box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
             color: #fff;
         }
-
-        /* ===== MODAL CHAT AI ===== */
-        .modal-ai-chat {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2005;
-        }
-
-        .ai-chat-box {
-            background: var(--card-bg);
-            border-radius: 18px;
-            border: 2px solid #00b8ff;
-            width: 90%;
-            max-width: 600px;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: 0 0 40px rgba(0, 184, 255, 0.4);
-            backdrop-filter: blur(15px);
-            overflow: hidden;
-        }
-
-        body.light-mode .ai-chat-box {
-            background: rgba(255, 255, 255, 0.95);
-            border-color: #06B6D4;
-            box-shadow: 0 0 40px rgba(6, 182, 212, 0.3);
-        }
-
-        .ai-chat-header {
-            padding: 16px 20px;
-            background: rgba(15, 23, 42, 0.9);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        body.light-mode .ai-chat-header {
-            background: #f1f5f9;
-            border-bottom-color: rgba(6, 182, 212, 0.2);
-        }
-
-        .ai-chat-title {
-            font-family: 'Orbitron', sans-serif;
-            color: #00ffcc;
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        body.light-mode .ai-chat-title {
-            color: #06B6D4;
-        }
-
-        .close-ai-chat {
-            font-size: 1.8rem;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        body.light-mode .close-ai-chat {
-            color: #1e293b;
-        }
-
-        .close-ai-chat:hover {
-            transform: rotate(90deg) scale(1.2);
-        }
-
-        .ai-chat-messages {
-            flex-grow: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .ai-message {
-            max-width: 80%;
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            word-wrap: break-word;
-        }
-
-        .ai-message.user {
-            background: linear-gradient(135deg, #00ffcc, #00b8ff);
-            color: #000;
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
-            font-weight: 600;
-        }
-
-        body.light-mode .ai-message.user {
-            background: linear-gradient(135deg, #06B6D4, #A78BFA);
-            color: #fff;
-        }
-
-        .ai-message.bot {
-            background: rgba(30, 41, 59, 0.85);
-            border: 1px solid rgba(0, 184, 255, 0.3);
-            color: #fff;
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
-        }
-
-        body.light-mode .ai-message.bot {
-            background: #e2e8f0;
-            color: #1e293b;
-            border-color: rgba(6, 182, 212, 0.3);
-        }
-
-        .ai-chat-input-area {
-            padding: 15px 20px;
-            background: rgba(15, 23, 42, 0.9);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            gap: 10px;
-        }
-
-        body.light-mode .ai-chat-input-area {
-            background: #f1f5f9;
-            border-top-color: rgba(6, 182, 212, 0.2);
-        }
-
-        .ai-chat-input {
-            flex-grow: 1;
-            padding: 12px 16px;
-            border-radius: 8px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(0, 184, 255, 0.4);
-            color: #fff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.95rem;
-            outline: none;
-        }
-
-        body.light-mode .ai-chat-input {
-            background: #fff;
-            border-color: rgba(6, 182, 212, 0.4);
-            color: #1e293b;
-        }
-
-        .ai-chat-input:focus {
-            border-color: #00ffcc;
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
-        }
-
-        .ai-send-btn {
-            padding: 0 20px;
-            background: linear-gradient(135deg, #00b8ff, #9d4edd);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .ai-send-btn:hover {
-            box-shadow: 0 0 15px rgba(0, 184, 255, 0.6);
-        }
-
         /* ===== MODAL FEEDBACK ===== */
         .modal-feedback {
             position: fixed;
@@ -324,7 +130,6 @@
             align-items: center;
             z-index: 2002;
         }
-
         .feedback-content {
             background: var(--card-bg);
             padding: 30px;
@@ -336,13 +141,11 @@
             box-shadow: 0 0 35px rgba(0, 255, 204, 0.3);
             backdrop-filter: blur(15px);
         }
-
         body.light-mode .feedback-content {
             background: rgba(255, 255, 255, 0.95);
             border-color: #06B6D4;
             box-shadow: 0 0 35px rgba(6, 182, 212, 0.3);
         }
-
         .feedback-title {
             text-align: center;
             color: var(--primary-neon);
@@ -350,11 +153,9 @@
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
         }
-
         body.light-mode .feedback-title {
             color: #06B6D4;
         }
-
         .fb-input {
             width: 100%;
             padding: 12px 16px;
@@ -368,22 +169,18 @@
             outline: none;
             transition: all 0.3s ease;
         }
-
         body.light-mode .fb-input {
             background: #f8fafc;
             border-color: rgba(6, 182, 212, 0.4);
             color: #1e293b;
         }
-
         .fb-input:focus {
             border-color: var(--primary-neon);
             box-shadow: 0 0 12px rgba(0, 255, 204, 0.3);
         }
-
         .fb-textarea {
             resize: vertical;
         }
-
         .btn-submit-feedback {
             width: 100%;
             padding: 12px;
@@ -397,17 +194,14 @@
             transition: all 0.3s ease;
             box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
         }
-
         body.light-mode .btn-submit-feedback {
             background: linear-gradient(135deg, #06B6D4, #A78BFA);
             color: #fff;
             box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
         }
-
         .btn-submit-feedback:hover {
             box-shadow: 0 0 25px rgba(0, 255, 204, 0.7);
         }
-
         .close-feedback {
             position: absolute;
             top: 12px; right: 18px;
@@ -416,15 +210,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         body.light-mode .close-feedback {
             color: #1e293b;
         }
-
         .close-feedback:hover {
             transform: rotate(90deg) scale(1.2);
         }
-
         /* ===== MODAL XÁC NHẬN & THÀNH CÔNG TẢI FILE ===== */
         .modal-download {
             position: fixed;
@@ -436,7 +227,6 @@
             align-items: center;
             z-index: 2000;
         }
-
         .download-content {
             background: var(--card-bg);
             padding: 30px;
@@ -450,29 +240,24 @@
             backdrop-filter: blur(15px);
             animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
         body.light-mode .download-content {
             background: rgba(255, 255, 255, 0.95);
             border-color: #06B6D4;
             box-shadow: 0 0 35px rgba(6, 182, 212, 0.3);
         }
-
         @keyframes modalPop {
             from { transform: scale(0.8); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
-
         .download-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.4rem;
             color: var(--primary-neon);
             margin-bottom: 20px;
         }
-
         body.light-mode .download-title {
             color: #06B6D4;
         }
-
         .download-actions {
             display: flex;
             gap: 12px;
@@ -480,7 +265,6 @@
             align-items: center;
             margin-top: 10px;
         }
-
         .btn-cancel-download {
             flex: 1;
             padding: 12px 20px;
@@ -493,23 +277,19 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         body.light-mode .btn-cancel-download {
             background: #e2e8f0;
             color: #64748B;
             border-color: #cbd5e1;
         }
-
         .btn-cancel-download:hover {
             background: rgba(255, 255, 255, 0.15);
             color: #fff;
         }
-
         body.light-mode .btn-cancel-download:hover {
             background: #cbd5e1;
             color: #1e293b;
         }
-
         .btn-confirm-download {
             flex: 1;
             padding: 12px 20px;
@@ -523,18 +303,15 @@
             transition: all 0.3s ease;
             box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
         }
-
         body.light-mode .btn-confirm-download {
             background: linear-gradient(135deg, #06B6D4, #A78BFA);
             color: #fff;
             box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
         }
-
         .btn-confirm-download:hover {
             transform: scale(1.02);
             box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
         }
-
         .success-icon-wrapper {
             margin: 15px auto;
             width: 80px;
@@ -548,18 +325,15 @@
             box-shadow: 0 0 20px #00ff88;
             animation: successPulse 1.5s infinite alternate;
         }
-
         .success-icon {
             font-size: 2.5rem;
             color: #00ff88;
             line-height: 1;
         }
-
         @keyframes successPulse {
             0% { transform: scale(0.9); box-shadow: 0 0 15px #00ff88; }
             100% { transform: scale(1.1); box-shadow: 0 0 30px #00ff88; }
         }
-
         .btn-close-success {
             padding: 10px 25px;
             background: #1e293b;
@@ -571,25 +345,21 @@
             margin-top: 15px;
             transition: all 0.3s ease;
         }
-
         body.light-mode .btn-close-success {
             background: #e2e8f0;
             color: #1e293b;
             border-color: #06B6D4;
         }
-
         .btn-close-success:hover {
             background: var(--primary-neon);
             color: #000;
         }
-
         #particle-canvas {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none;
             z-index: 0;
         }
-
         .glow-sphere {
             position: fixed;
             border-radius: 50%;
@@ -601,16 +371,13 @@
         }
         .glow-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: var(--secondary-neon); }
         .glow-2 { bottom: -10%; right: -10%; width: 600px; height: 600px; background: var(--primary-neon); }
-
         body.light-mode .glow-sphere {
             opacity: 0.08;
         }
-
         @keyframes floatGlow {
             0% { transform: scale(1) translate(0, 0); }
             100% { transform: scale(1.2) translate(30px, 40px); }
         }
-
         .layout-wrapper {
             position: relative;
             z-index: 10;
@@ -618,12 +385,10 @@
             margin: 0 auto;
             padding: 40px 20px;
         }
-
         header {
             text-align: center;
             margin-bottom: 40px;
         }
-
         .brand-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 3.2rem;
@@ -637,7 +402,6 @@
             transition: all 0.6s ease;
             display: inline-block;
         }
-
         body.light-mode .brand-title {
             background: linear-gradient(135deg, #06B6D4 0%, #A78BFA 50%, #FF6B6B 100%);
             -webkit-background-clip: text;
@@ -645,7 +409,6 @@
             text-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
             font-weight: 900;
         }
-
         .brand-subtitle {
             margin-top: 10px;
             font-size: 1.15rem;
@@ -653,7 +416,6 @@
             font-weight: 500;
             transition: color 0.6s ease;
         }
-
         /* ===== FIRE FLAME EFFECT FOR GOLD AUTHOR ===== */
         .gold-author {
             font-weight: 800;
@@ -667,11 +429,9 @@
             transition: all 0.6s ease;
             position: relative;
         }
-
         @keyframes goldShine {
             to { background-position: 200% center; }
         }
-
         body.light-mode .gold-author {
             background: linear-gradient(135deg, #FF6B6B 0%, #FF8787 30%, #FFB74D 60%, #FF6B6B 100%);
             background-size: 200% auto;
@@ -681,7 +441,6 @@
             animation: fireFlame 3s ease-in-out infinite;
             font-weight: 800;
         }
-
         @keyframes fireFlame {
             0%, 100% {
                 background-position: 0% center;
@@ -692,7 +451,6 @@
                 text-shadow: 0 0 20px rgba(255, 107, 107, 0.8), 0 0 30px rgba(255, 152, 0, 0.6);
             }
         }
-
         .filter-section {
             display: flex;
             flex-direction: column;
@@ -700,13 +458,11 @@
             gap: 20px;
             margin-bottom: 45px;
         }
-
         .search-box {
             position: relative;
             width: 100%;
             max-width: 550px;
         }
-
         .search-input {
             width: 100%;
             padding: 16px 24px;
@@ -720,21 +476,18 @@
             transition: all 0.3s ease;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
         }
-
         body.light-mode .search-input {
             background: rgba(255, 255, 255, 0.95);
             border-color: rgba(6, 182, 212, 0.5);
             color: #1E293B;
             box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
         }
-
         .category-tabs {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 12px;
         }
-
         .tab-btn {
             background: rgba(30, 41, 59, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -746,14 +499,12 @@
             backdrop-filter: blur(5px);
             transition: all 0.3s ease;
         }
-
         body.light-mode .tab-btn {
             background: rgba(255, 255, 255, 0.8);
             border: 2px solid rgba(6, 182, 212, 0.3);
             color: #64748B;
             box-shadow: 0 2px 8px rgba(6, 182, 212, 0.1);
         }
-
         .tab-btn:hover, .tab-btn.active {
             color: #000;
             background: var(--primary-neon);
@@ -761,20 +512,17 @@
             box-shadow: 0 0 20px rgba(0, 255, 204, 0.6);
             transform: translateY(-2px);
         }
-
         body.light-mode .tab-btn.active {
             color: #fff;
             background: linear-gradient(135deg, #06B6D4, #A78BFA);
             border-color: #06B6D4;
             box-shadow: 0 0 20px rgba(6, 182, 212, 0.6);
         }
-
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 28px;
         }
-
         .video-card {
             background: var(--card-bg);
             border-radius: 18px;
@@ -787,18 +535,15 @@
             position: relative;
             cursor: pointer;
         }
-
         body.light-mode .video-card {
             border: 2px solid rgba(6, 182, 212, 0.2);
             box-shadow: 0 8px 20px rgba(6, 182, 212, 0.12);
         }
-
         .video-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 15px 35px rgba(0, 255, 204, 0.25);
             border-color: var(--primary-neon);
         }
-
         .thumb-box {
             position: relative;
             width: 100%;
@@ -806,18 +551,15 @@
             overflow: hidden;
             background: #000;
         }
-
         .thumb-box img {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-
         .video-card:hover .thumb-box img {
             transform: scale(1.08);
         }
-
         .playlist-count-badge {
             position: absolute;
             bottom: 10px; right: 10px;
@@ -829,7 +571,6 @@
             font-size: 0.8rem;
             font-weight: 700;
         }
-
         .badge-cat {
             position: absolute;
             top: 12px; left: 12px;
@@ -841,17 +582,14 @@
             font-size: 0.75rem;
             font-weight: 700;
         }
-
         .badge-word { border-color: #00b8ff; color: #00b8ff; }
         .badge-ppt { border-color: #ff9900; color: #ff9900; }
-
         .card-body {
             padding: 20px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
-
         .video-title {
             font-size: 1.15rem;
             font-weight: 700;
@@ -860,16 +598,13 @@
             line-height: 1.4;
             transition: color 0.6s ease;
         }
-
         body.light-mode .video-title { color: #1E293B; }
-
         .video-desc {
             font-size: 0.88rem;
             color: var(--text-sub);
             margin-bottom: 16px;
             line-height: 1.5;
         }
-
         .btn-open-album {
             width: 100%;
             padding: 12px;
@@ -884,7 +619,6 @@
             transition: all 0.3s ease;
             margin-top: auto;
         }
-
         .btn-open-album.disabled {
             background: linear-gradient(135deg, #475569, #334155) !important;
             color: #94a3b8 !important;
@@ -892,7 +626,6 @@
             box-shadow: none !important;
             opacity: 0.7;
         }
-
         .modal-player {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -904,7 +637,6 @@
             z-index: 1000;
             padding: 20px;
         }
-
         .playlist-layout {
             width: 100%;
             max-width: 1100px;
@@ -917,24 +649,20 @@
             box-shadow: 0 0 50px rgba(0, 255, 204, 0.3);
             position: relative;
         }
-
         .main-video-area {
             flex: 2.2;
             display: flex;
             flex-direction: column;
             background: #000;
         }
-
         .video-frame-container {
             width: 100%;
             height: 70%;
             background: #000;
         }
-
         .video-frame-container iframe {
             width: 100%; height: 100%; border: none;
         }
-
         .video-meta-box {
             padding: 20px;
             background: #0d1322;
@@ -943,15 +671,12 @@
             flex-direction: column;
             justify-content: space-between;
         }
-
         .playing-title {
             color: #fff;
             font-size: 1.2rem;
             font-weight: 700;
         }
-
         body.light-mode .playing-title { color: #1E293B; }
-
         .btn-download-file {
             display: inline-flex;
             align-items: center;
@@ -966,7 +691,6 @@
             box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
             cursor: pointer;
         }
-
         .playlist-sidebar {
             flex: 1;
             background: #0f172a;
@@ -974,7 +698,6 @@
             display: flex;
             flex-direction: column;
         }
-
         .playlist-header {
             padding: 16px;
             background: #1e293b;
@@ -983,13 +706,11 @@
             font-weight: 700;
             font-size: 0.95rem;
         }
-
         .playlist-items-list {
             overflow-y: auto;
             flex-grow: 1;
             padding: 10px;
         }
-
         .playlist-item {
             display: flex;
             gap: 12px;
@@ -999,47 +720,38 @@
             margin-bottom: 8px;
             background: rgba(255, 255, 255, 0.02);
         }
-
         .playlist-item:hover, .playlist-item.active {
             background: rgba(0, 255, 204, 0.15);
             border-left: 4px solid var(--primary-neon);
         }
-
         .playlist-item img {
             width: 80px; height: 50px; object-fit: cover; border-radius: 6px;
         }
-
         .playlist-item-info {
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-
         .playlist-item-title {
             color: #fff; font-size: 0.85rem; font-weight: 600; line-height: 1.3;
         }
-
         body.light-mode .playlist-item-title { color: #1E293B; }
-
         .playlist-item-duration {
             color: var(--text-sub); font-size: 0.75rem; margin-top: 4px;
         }
-
         .close-modal-btn {
             position: absolute;
             top: 15px; right: 20px;
             color: #fff; font-size: 2rem; cursor: pointer; z-index: 1001;
         }
-
         @media (max-width: 768px) {
             .top-right-controls { top: 15px; right: 15px; gap: 8px; }
-            .feedback-toggle-btn, .ai-chat-toggle-btn { height: 50px; padding: 0 14px; font-size: 0.85rem; }
+            .feedback-toggle-btn { height: 50px; padding: 0 14px; font-size: 0.85rem; }
             .theme-toggle-btn { width: 50px; height: 50px; font-size: 1.4rem; }
             .playlist-layout { flex-direction: column; height: 90vh; }
             .main-video-area { height: 50%; }
             .playlist-sidebar { height: 50%; }
         }
-
         /* ===== HNG BOT ===== */
         #hngBot {
             position: fixed; top: 18px; left: 18px; width: 190px; z-index: 998;
@@ -1091,7 +803,6 @@
     </style>
 </head>
 <body>
-
     <!-- ===== HNG BOT ===== -->
     <div id="hngBot" aria-label="HNG Bot">
         <div class="hng-bot-character" id="hngBotCharacter">
@@ -1111,33 +822,13 @@
             Xin chào! Hãy học tập và vươn lên nhé! 🚀
         </div>
     </div>
-
-    <!-- ===== CONTAINER NÚT GÓP Ý, CHAT AI VÀ ĐỔI GIAO DIỆN ===== -->
+    <!-- ===== CONTAINER NÚT GÓP Ý VÀ ĐỔI GIAO DIỆN ===== -->
     <div class="top-right-controls">
-        <button class="ai-chat-toggle-btn" onclick="openAiChat()">🤖 CHAT AI</button>
         <button class="feedback-toggle-btn" onclick="openFeedback()">💬 Góp Ý</button>
         <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
             <span id="themeIcon">🌙</span>
         </button>
     </div>
-
-    <!-- ===== MODAL KHUNG CHAT AI (GEMINI) ===== -->
-    <div class="modal-ai-chat" id="aiChatModal">
-        <div class="ai-chat-box">
-            <div class="ai-chat-header">
-                <span class="ai-chat-title">🤖 HNG AI ASSISTANT</span>
-                <span class="close-ai-chat" onclick="closeAiChat()">&times;</span>
-            </div>
-            <div class="ai-chat-messages" id="aiChatMessages">
-                <div class="ai-message bot">Chào bạn! Tôi là trợ lý ảo Gemini tích hợp trên HNG Academy. Bạn cần tôi giải đáp thắc mắc gì về Excel, Word hay lập trình không?</div>
-            </div>
-            <div class="ai-chat-input-area">
-                <input type="text" id="aiChatInput" class="ai-chat-input" placeholder="Nhập câu hỏi của bạn cho AI..." onkeypress="handleAiKeyPress(event)">
-                <button class="ai-send-btn" onclick="sendAiMessage()">GỬI</button>
-            </div>
-        </div>
-    </div>
-
     <!-- ===== MODAL BẢNG GÓP Ý ===== -->
     <div class="modal-feedback" id="feedbackModal">
         <div class="feedback-content">
@@ -1154,7 +845,6 @@
             </form>
         </div>
     </div>
-
     <!-- ===== MODAL XÁC NHẬN TẢI FILE ===== -->
     <div class="modal-download" id="downloadConfirmModal">
         <div class="download-content">
@@ -1166,7 +856,6 @@
             </div>
         </div>
     </div>
-
     <!-- ===== MODAL THÀNH CÔNG ===== -->
     <div class="modal-download" id="downloadSuccessModal">
         <div class="download-content">
@@ -1178,11 +867,9 @@
             <button class="btn-close-success" onclick="closeSuccessModal()">Đóng</button>
         </div>
     </div>
-
     <div class="glow-sphere glow-1"></div>
     <div class="glow-sphere glow-2"></div>
     <canvas id="particle-canvas"></canvas>
-
     <div class="layout-wrapper">
         <header>
             <h1 class="brand-title">HNG ACADEMY</h1>
@@ -1191,7 +878,6 @@
                 <span class="gold-author">HNG/HoàiNg</span>
             </p>
         </header>
-
         <div class="filter-section">
             <div class="search-box">
                 <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm đề thi Excel, Word, PowerPoint, VLOOKUP..." onkeyup="filterVideos()">
@@ -1205,7 +891,6 @@
                 <button class="tab-btn" onclick="filterCategory('code', this)">Lập Trình & Web</button>
             </div>
         </div>
-
         <div class="video-grid" id="videoContainer">
             <div class="video-card" data-category="excel2019" data-title="bộ bài giải excel 2019 và file đề" onclick="openPlaylist(0)">
                 <div class="thumb-box">
@@ -1219,7 +904,6 @@
                     <button class="btn-open-album">▶ Mở Danh Sách Video</button>
                 </div>
             </div>
-
             <div class="video-card" data-category="word2019" data-title="bộ bài giải word 2019 và file đề" onclick="openPlaylist(1)">
                 <div class="thumb-box">
                     <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&auto=format&fit=crop" alt="Word 2019">
@@ -1232,434 +916,7 @@
                     <button class="btn-open-album">▶ Mở Danh Sách Video</button>
                 </div>
             </div>
-
             <div class="video-card" data-category="powerpoint2019" data-title="bộ bài giải powerpoint 2019 và file đề">
                 <div class="thumb-box">
                     <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&auto=format&fit=crop" alt="PowerPoint 2019">
-                    <div class="badge-cat badge-ppt">Giải POWERPOINT 2019</div>
-                    <div class="playlist-count-badge">⏳ Đang Cập Nhật</div>
-                </div>
-                <div class="card-body">
-                    <h3 class="video-title">Bộ Bài Giải PowerPoint 2019 Và FILE Đề</h3>
-                    <p class="video-desc">Danh sách video bài giải PowerPoint 2019</p>
-                    <button class="btn-open-album disabled" disabled>🔒 Đang Được Cập Nhật!</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-player" id="playlistModal">
-        <span class="close-modal-btn" onclick="closePlaylist()">&times;</span>
-        <div class="playlist-layout">
-            <div class="main-video-area">
-                <div class="video-frame-container">
-                    <iframe id="mainIframe" src="" allowfullscreen></iframe>
-                </div>
-                <div class="video-meta-box">
-                    <h4 class="playing-title" id="currentVideoTitle">Tên Bài Học Đang Phát</h4>
-                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                        <button class="btn-download-file" onclick="openDownloadConfirm('file')">📥 TẢI FILE ĐỀ BÀI</button>
-                        <button class="btn-download-file" onclick="openDownloadConfirm('exam')">📝 ĐỀ THI THỬ</button>
-                    </div>
-                </div>
-            </div>
-            <div class="playlist-sidebar">
-                <div class="playlist-header" id="playlistHeaderTitle">DANH SÁCH BÀI GIẢI</div>
-                <div class="playlist-items-list" id="playlistItemsContainer"></div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // ================================================================
-        // 🔴 GEMINI AI - DÁN STANDARD GEMINI API KEY ĐÃ RESTRICT GEMINI API
-        // ================================================================
-        const GEMINI_API_KEY = "AQ.Ab8RN6J818dev_ffHsTaw5PguL3Lu6wc4NRtBoUlQrFYYwZd4A";
-        const GEMINI_MODEL = "gemini-3.6-flash";
-        const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
-
-        // Lưu lịch sử trong phiên chat để AI trả lời tự nhiên hơn
-        const geminiHistory = [];
-
-        function openAiChat() {
-            document.getElementById('aiChatModal').style.display = 'flex';
-            setTimeout(() => document.getElementById('aiChatInput')?.focus(), 50);
-        }
-
-        function closeAiChat() {
-            document.getElementById('aiChatModal').style.display = 'none';
-        }
-
-        function handleAiKeyPress(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendAiMessage();
-            }
-        }
-
-        async function sendAiMessage() {
-            const inputField = document.getElementById('aiChatInput');
-            const messageContainer = document.getElementById('aiChatMessages');
-            const sendBtn = document.querySelector('.ai-send-btn');
-            const userText = inputField.value.trim();
-
-            if (!userText) return;
-
-            if (!GEMINI_API_KEY || GEMINI_API_KEY.trim() === '' || GEMINI_API_KEY === 'PASTE_STANDARD_GEMINI_API_KEY_HERE') {
-                const err = document.createElement('div');
-                err.className = 'ai-message bot';
-                err.textContent = '❌ Chưa cấu hình Gemini API key Standard. Hãy dán key Gemini API Standard (không bind service account) vào GEMINI_API_KEY.';
-                messageContainer.appendChild(err);
-                return;
-            }
-
-            const userMsgDiv = document.createElement('div');
-            userMsgDiv.className = 'ai-message user';
-            userMsgDiv.textContent = userText;
-            messageContainer.appendChild(userMsgDiv);
-
-            inputField.value = '';
-            inputField.disabled = true;
-            if (sendBtn) sendBtn.disabled = true;
-            messageContainer.scrollTop = messageContainer.scrollHeight;
-
-            const botLoadingDiv = document.createElement('div');
-            botLoadingDiv.className = 'ai-message bot';
-            botLoadingDiv.textContent = 'AI đang suy nghĩ...';
-            messageContainer.appendChild(botLoadingDiv);
-            messageContainer.scrollTop = messageContainer.scrollHeight;
-
-            try {
-                // ⚠️ KHÔNG dùng Authorization: Bearer cho Gemini API key.
-                // Gemini API key được gửi bằng x-goog-api-key.
-                const contents = [
-                    ...geminiHistory,
-                    { role: 'user', parts: [{ text: userText }] }
-                ];
-
-                const response = await fetch(GEMINI_ENDPOINT, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'x-goog-api-key': GEMINI_API_KEY
-                    },
-                    body: JSON.stringify({
-                        systemInstruction: {
-                            parts: [{
-                                text: 'Bạn là HNG AI Assistant của HNG Academy. Trả lời bằng tiếng Việt, tự nhiên, thân thiện, dễ hiểu. Hỗ trợ học tập, Excel, Word, PowerPoint, lập trình, công nghệ và các câu hỏi thông thường. Với bài toán, hãy trình bày từng bước rõ ràng. Không trả lời một câu cố định cho mọi câu hỏi.'
-                            }]
-                        },
-                        contents: contents,
-                        generationConfig: {
-                            maxOutputTokens: 2048
-                        }
-                    })
-                });
-
-                const data = await response.json().catch(() => ({}));
-                botLoadingDiv.remove();
-
-                if (!response.ok) {
-                    const apiMessage = data?.error?.message || `HTTP ${response.status}`;
-                    const errorDiv = document.createElement('div');
-                    errorDiv.className = 'ai-message bot';
-                    errorDiv.textContent = `❌ Gemini API lỗi: ${apiMessage}`;
-                    messageContainer.appendChild(errorDiv);
-                    return;
-                }
-
-                const aiReply = data?.candidates?.[0]?.content?.parts
-                    ?.map(part => part.text || '')
-                    .join('')
-                    .trim();
-
-                if (!aiReply) {
-                    const reason = data?.promptFeedback?.blockReason || data?.error?.message || 'Không nhận được nội dung phản hồi.';
-                    const errorDiv = document.createElement('div');
-                    errorDiv.className = 'ai-message bot';
-                    errorDiv.textContent = `❌ Gemini không trả lời: ${reason}`;
-                    messageContainer.appendChild(errorDiv);
-                    return;
-                }
-
-                geminiHistory.push(
-                    { role: 'user', parts: [{ text: userText }] },
-                    { role: 'model', parts: [{ text: aiReply }] }
-                );
-
-                // Giữ tối đa 20 lượt để request không phình quá lớn.
-                if (geminiHistory.length > 20) geminiHistory.splice(0, geminiHistory.length - 20);
-
-                const botMsgDiv = document.createElement('div');
-                botMsgDiv.className = 'ai-message bot';
-                botMsgDiv.textContent = aiReply;
-                messageContainer.appendChild(botMsgDiv);
-            } catch (error) {
-                botLoadingDiv.remove();
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'ai-message bot';
-                errorDiv.textContent = `❌ Không thể kết nối Gemini: ${error?.message || 'Lỗi mạng/CORS.'}`;
-                messageContainer.appendChild(errorDiv);
-            } finally {
-                inputField.disabled = false;
-                if (sendBtn) sendBtn.disabled = false;
-                inputField.focus();
-                messageContainer.scrollTop = messageContainer.scrollHeight;
-            }
-        }
-
-        let currentTargetDownloadUrl = "";
-        const albumsData = [
-            {
-                albumTitle: "Bộ Bài Giải EXCEL 2019 và FILE Đề",
-                fileUrl: "https://drive.google.com/file/d/1_p14paetwGodKiByRwioUMD33wka1oa_/view",
-                examUrl: "https://drive.google.com/file/d/19VMOb2A4SEW2CFOHbGFnKjymjHfImp3Q/view",
-                videos: [
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 1", youtubeId: "zNF2f2oJ8ZE", duration: "10:15" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 2", youtubeId: "lkyTJakc254", duration: "08:40" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 3", youtubeId: "BsIbiqj7l4M", duration: "12:05" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 4", youtubeId: "GVqDYH2gKro", duration: "06:30" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 5", youtubeId: "1iO64evzNQ0", duration: "09:15" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 6", youtubeId: "3llvysoZoHE", duration: "11:20" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 1 - PROJECT 7", youtubeId: "-I0kv5XW_AY", duration: "07:50" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 1", youtubeId: "-Wg8XZrtj4w", duration: "10:45" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 2", youtubeId: "2PQXi2b6kWs", duration: "08:15" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 3", youtubeId: "96l1nthCBqI", duration: "11:30" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 4", youtubeId: "LyVDBTtAQ0c", duration: "09:05" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 5", youtubeId: "LmN8s58X1h4", duration: "12:40" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 6", youtubeId: "nK8VmEP3sps", duration: "07:25" },
-                    { title: "MOS EXCEL 2019/365 - EXAM 2 - PROJECT 7", youtubeId: "GENqe2PhBNs", duration: "13:10" }
-                ]
-            },
-            {
-                albumTitle: "Bộ Bài Giải Word 2019 và FILE Đề",
-                fileUrl: "https://drive.google.com/file/d/1X7dL9Cqk4LqSU_s36nQL20lt7Nfwiqq8/view",
-                examUrl: "https://drive.google.com/file/d/1-gBOMrbP7bIt_CG22A7W3r41d0TbLwwg/view",
-                videos: [
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 1", youtubeId: "uxfQiSbaipU", duration: "09:30" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 2", youtubeId: "lT5E9o0Dcb4", duration: "08:15" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 3", youtubeId: "ell6BGYpvto", duration: "07:45" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 4", youtubeId: "f9lTnCogpfI", duration: "10:20" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 5", youtubeId: "AFOfAzAsus8", duration: "06:50" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 6", youtubeId: "PVnKD8tSf3E", duration: "11:10" },
-                    { title: "MOS WORD 2019/365 - EXAM 1 - PROJECT 7", youtubeId: "4rbQV03Of2M", duration: "08:40" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 1", youtubeId: "L_xIXewAkEA", duration: "09:15" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 2", youtubeId: "DWcL7R5HWzU", duration: "07:30" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 3", youtubeId: "2FuPhV1yGpY", duration: "10:05" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 4", youtubeId: "cRlQyvomyj4", duration: "08:55" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 5", youtubeId: "SmXoYS8I9wA", duration: "12:10" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 6", youtubeId: "1rsDmyv0bdQ", duration: "06:40" },
-                    { title: "MOS WORD 2019/365 - EXAM 2 - PROJECT 7", youtubeId: "UiXtfiRZoaI", duration: "09:25" }
-                ]
-            }
-        ];
-
-        function openDownloadConfirm(type) {
-            const album = albumsData[currentAlbumIndex];
-            currentTargetDownloadUrl = (type === 'exam') ? album.examUrl : album.fileUrl;
-            document.getElementById('downloadConfirmModal').style.display = 'flex';
-        }
-
-        function closeDownloadConfirm() {
-            document.getElementById('downloadConfirmModal').style.display = 'none';
-        }
-
-        function startDownloadProcess() {
-            document.getElementById('downloadConfirmModal').style.display = 'none';
-            if (currentTargetDownloadUrl) {
-                window.open(currentTargetDownloadUrl, '_blank');
-            }
-            document.getElementById('downloadSuccessModal').style.display = 'flex';
-        }
-
-        function closeSuccessModal() {
-            document.getElementById('downloadSuccessModal').style.display = 'none';
-        }
-
-        function openFeedback() {
-            document.getElementById('feedbackModal').style.display = 'flex';
-        }
-
-        function closeFeedback() {
-            document.getElementById('feedbackModal').style.display = 'none';
-        }
-
-        // ================================================================
-        // 🟢 WEB3FORMS - GỬI Ý KIẾN (TÁCH HOÀN TOÀN KHỎI GEMINI)
-        // ================================================================
-        document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const form = e.target;
-            const formData = new FormData(form);
-            const submitBtn = form.querySelector('.btn-submit-feedback');
-            const accessKey = form.querySelector('[name="access_key"]')?.value?.trim();
-
-            if (!accessKey || accessKey === 'PASTE_WEB3FORMS_ACCESS_KEY_HERE' || accessKey.length !== 36) {
-                alert('❌ Chưa nhập Web3Forms Access Key. Lấy Access Key tại web3forms.com rồi dán vào dòng WEB3FORMS trong code.');
-                return;
-            }
-
-            submitBtn.innerText = 'ĐANG GỬI...';
-            submitBtn.disabled = true;
-
-            try {
-                const object = Object.fromEntries(formData.entries());
-
-                const response = await fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(object)
-                });
-
-                const data = await response.json().catch(() => ({}));
-
-                if (response.ok && data.success) {
-                    alert('Cảm Ơn Bạn Đã Gửi Ý Kiến! 🚀');
-                    form.reset();
-                    closeFeedback();
-                } else {
-                    const message = data?.message || data?.body?.message || `HTTP ${response.status}`;
-                    alert(`❌ Web3Forms lỗi: ${message}`);
-                    console.error('Web3Forms response:', response.status, data);
-                }
-            } catch (error) {
-                console.error('Web3Forms error:', error);
-                alert(`❌ Không thể kết nối Web3Forms: ${error?.message || 'Lỗi mạng.'}`);
-            } finally {
-                submitBtn.innerText = 'GỬI Ý KIẾN 🚀';
-                submitBtn.disabled = false;
-            }
-        });
-
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('themeIcon');
-            body.classList.toggle('light-mode');
-            if (body.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'light');
-                themeIcon.textContent = '☀️';
-            } else {
-                localStorage.setItem('theme', 'dark');
-                themeIcon.textContent = '🌙';
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            const themeIcon = document.getElementById('themeIcon');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-mode');
-                themeIcon.textContent = '☀️';
-            } else {
-                themeIcon.textContent = '🌙';
-            }
-        });
-
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        function initCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            for (let i = 0; i < 100; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2 + 0.5,
-                    speedX: (Math.random() - 0.5) * 0.4,
-                    speedY: (Math.random() - 0.5) * 0.4,
-                    alpha: Math.random(),
-                    glow: Math.random() > 0.5 ? '#00ffcc' : '#ff007f'
-                });
-            }
-        }
-        function drawParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = p.glow;
-                ctx.globalAlpha = p.alpha;
-                ctx.fill();
-                p.x += p.speedX; p.y += p.speedY;
-                if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
-            });
-            requestAnimationFrame(drawParticles);
-        }
-        window.addEventListener('resize', initCanvas);
-        initCanvas(); drawParticles();
-
-        let currentAlbumIndex = 0;
-        function openPlaylist(albumIdx) {
-            currentAlbumIndex = albumIdx;
-            const album = albumsData[albumIdx];
-            document.getElementById('playlistHeaderTitle').innerText = album.albumTitle.toUpperCase();
-            const container = document.getElementById('playlistItemsContainer');
-            container.innerHTML = '';
-
-            album.videos.forEach((vid, vIdx) => {
-                const autoYtThumb = `https://img.youtube.com/vi/${vid.youtubeId}/mqdefault.jpg`;
-                const item = document.createElement('div');
-                item.className = `playlist-item ${vIdx === 0 ? 'active' : ''}`;
-                item.onclick = () => selectVideo(vIdx);
-                item.innerHTML = `
-                    <img src="${autoYtThumb}" alt="thumb">
-                    <div class="playlist-item-info">
-                        <div class="playlist-item-title">${vid.title}</div>
-                        <div class="playlist-item-duration">⏱ ${vid.duration}</div>
-                    </div>
-                `;
-                container.appendChild(item);
-            });
-
-            selectVideo(0);
-            document.getElementById('playlistModal').style.display = 'flex';
-        }
-
-        function selectVideo(videoIdx) {
-            const album = albumsData[currentAlbumIndex];
-            const vid = album.videos[videoIdx];
-            document.getElementById('mainIframe').src = `https://www.youtube.com/embed/${vid.youtubeId}?autoplay=1`;
-            document.getElementById('currentVideoTitle').innerText = vid.title;
-
-            const items = document.querySelectorAll('.playlist-item');
-            items.forEach((item, idx) => {
-                if (idx === videoIdx) item.classList.add('active');
-                else item.classList.remove('active');
-            });
-        }
-
-        function closePlaylist() {
-            document.getElementById('mainIframe').src = '';
-            document.getElementById('playlistModal').style.display = 'none';
-        }
-
-        let activeCategory = 'all';
-        function filterCategory(cat, btn) {
-            activeCategory = cat;
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            filterVideos();
-        }
-
-        function filterVideos() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.querySelectorAll('.video-card');
-            cards.forEach(card => {
-                const title = card.getAttribute('data-title');
-                const cat = card.getAttribute('data-category');
-                const matchesCat = (activeCategory === 'all' || cat === activeCategory);
-                const matchesQuery = title.includes(query);
-                card.style.display = (matchesCat && matchesQuery) ? 'flex' : 'none';
-            });
-        }
-        filterVideos();
-    </script>
-</body>
-</html>
+                    <div class
