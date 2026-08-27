@@ -248,6 +248,49 @@
             color: #fff;
         }
 
+        .ai-message pre {
+            margin: 10px 0 0;
+            padding: 12px 14px;
+            overflow-x: auto;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(0, 255, 204, 0.18);
+            white-space: pre;
+        }
+
+        .ai-message code {
+            font-family: Consolas, Monaco, monospace;
+            font-size: 0.9em;
+        }
+
+        .ai-message :not(pre) > code {
+            padding: 2px 5px;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.28);
+        }
+
+        .ai-message ul,
+        .ai-message ol {
+            margin: 8px 0 8px 20px;
+            padding-left: 18px;
+        }
+
+        .ai-message li {
+            margin: 4px 0;
+        }
+
+        .ai-message strong {
+            font-weight: 800;
+        }
+
+        .ai-message p {
+            margin: 0 0 8px;
+        }
+
+        .ai-message p:last-child {
+            margin-bottom: 0;
+        }
+
         .ai-message.bot {
             background: rgba(30, 41, 59, 0.85);
             border: 1px solid rgba(0, 184, 255, 0.3);
@@ -1089,6 +1132,17 @@
             50% { transform: translateY(-4px); }
         }
     </style>
+    <!-- MathJax: hiển thị công thức Toán/LaTeX trong câu trả lời AI -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                displayMath: [['$$','$$'], ['\\[','\\]']]
+            },
+            options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+        };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -1270,11 +1324,45 @@
     </div>
 
     <script>
-        // ===== CẤU HÌNH GEMINI API KEY =====
-        const GEMINI_API_KEY = "AQ.Ab8RN6JBK_rUHL261z3aPGX16V-fITu_xXy6Gel68mqzUEA_KQ";
+        // ===== HNG AI CHAT - GEMINI =====
+        // GitHub Pages: gọi trực tiếp Gemini API.
+        // API key được đặt ở frontend theo yêu cầu của bạn.
+        const GEMINI_API_KEY = "AQ.Ab8RN6LfTDKDETWJPqCFBTq4XkdZ6UZy8xWrccitUwV23inUjw";
+        const GEMINI_MODEL = "gemini-3.6-flash";
+
+        // Lưu lịch sử hội thoại trong phiên hiện tại để AI hiểu ngữ cảnh.
+        // Gemini REST API là stateless nên phải gửi lại history ở mỗi request.
+        let aiConversationHistory = [];
+
+        const AI_SYSTEM_INSTRUCTION = `
+Bạn là HNG AI Assistant của HNG Academy.
+
+Bạn là một trợ lý AI trò chuyện tự nhiên, thông minh và hữu ích.
+Luôn trả lời bằng tiếng Việt, trừ khi người dùng yêu cầu ngôn ngữ khác.
+
+Quy tắc trả lời:
+- Với lời chào như "hello", "hi", "alo", hãy chào lại tự nhiên, đừng trả lời máy móc.
+- Hãy đọc và sử dụng ngữ cảnh của toàn bộ cuộc trò chuyện hiện tại.
+- Nếu người dùng nói "cái đó", "nó", "ví dụ đi", "giải thích thêm"... hãy hiểu dựa trên câu hỏi trước đó.
+- Không lặp lại một câu trả lời cố định cho mọi câu hỏi.
+- Trả lời trực tiếp vào điều người dùng hỏi.
+- Câu hỏi đơn giản thì trả lời ngắn gọn.
+- Câu hỏi cần giải thích thì trả lời đầy đủ, có ví dụ khi hữu ích.
+- Hỗ trợ tốt Excel, Word, PowerPoint, lập trình, HTML, CSS, JavaScript và công nghệ.
+- Với công thức Excel, đưa công thức trong code block và giải thích cách dùng.
+- Với code, đưa code rõ ràng, dễ copy và giải thích những phần quan trọng.
+- Nếu người dùng hỏi chuyện đời thường, hãy trò chuyện tự nhiên như một trợ lý AI.
+- Không tự nhận mình là con người.
+- Không nói rằng bạn chỉ có thể trả lời một số câu hỏi nếu không thực sự cần thiết.
+`;
 
         function openAiChat() {
             document.getElementById('aiChatModal').style.display = 'flex';
+
+            setTimeout(() => {
+                const input = document.getElementById('aiChatInput');
+                if (input) input.focus();
+            }, 100);
         }
 
         function closeAiChat() {
@@ -1282,77 +1370,226 @@
         }
 
         function handleAiKeyPress(e) {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
                 sendAiMessage();
             }
+        }
+
+        // ===== RENDER CÂU TRẢ LỜI AI =====
+        // Chuyển Markdown + LaTeX của Gemini thành giao diện đẹp,
+        // thay vì hiện nguyên dấu **, $, \times, \text{}... trên màn hình.
+        function escapeHtml(text) {
+            return String(text)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function renderAiMarkdown(text) {
+            let source = String(text || '').replace(/\r\n/g, '\n');
+            const blocks = [];
+
+            // Giữ nguyên code block trước khi xử lý Markdown.
+            source = source.replace(/```([\w+-]*)\n?([\s\S]*?)```/g, function(_, lang, code) {
+                const token = `@@CODEBLOCK_${blocks.length}@@`;
+                blocks.push(
+                    `<pre><code${lang ? ` class="language-${escapeHtml(lang)}"` : ''}>${escapeHtml(code.replace(/\n$/, ''))}</code></pre>`
+                );
+                return token;
+            });
+
+            // Escape HTML để câu trả lời từ AI không thể chèn HTML tùy ý.
+            source = escapeHtml(source);
+
+            // Inline code.
+            const inlineCodes = [];
+            source = source.replace(/`([^`\n]+)`/g, function(_, code) {
+                const token = `@@INLINECODE_${inlineCodes.length}@@`;
+                inlineCodes.push(`<code>${code}</code>`);
+                return token;
+            });
+
+            // Tiêu đề Markdown.
+            source = source.replace(/^###\s+(.+)$/gm, '<strong>$1</strong>');
+            source = source.replace(/^##\s+(.+)$/gm, '<strong>$1</strong>');
+            source = source.replace(/^#\s+(.+)$/gm, '<strong>$1</strong>');
+
+            // Bold / italic.
+            source = source.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+            source = source.replace(/__([^_\n]+)__/g, '<strong>$1</strong>');
+            source = source.replace(/\*([^*\n]+)\*/g, '<em>$1</em>');
+            source = source.replace(/_([^_\n]+)_/g, '<em>$1</em>');
+
+            // Danh sách đơn giản.
+            source = source.replace(/^(?:[-*])\s+(.+)$/gm, '<li>$1</li>');
+            source = source.replace(/^(\d+\.)\s+(.+)$/gm, '<li>$2</li>');
+            source = source.replace(/(?:<li>.*<\/li>\n?)+/g, function(block) {
+                return `<ul>${block}</ul>`;
+            });
+
+            // Xuống dòng.
+            source = source.replace(/\n{2,}/g, '<br><br>');
+            source = source.replace(/\n/g, '<br>');
+
+            // Khôi phục code.
+            source = source.replace(/@@INLINECODE_(\d+)@@/g, function(_, i) {
+                return inlineCodes[Number(i)];
+            });
+            source = source.replace(/@@CODEBLOCK_(\d+)@@/g, function(_, i) {
+                return blocks[Number(i)];
+            });
+
+            return source;
         }
 
         async function sendAiMessage() {
             const inputField = document.getElementById('aiChatInput');
             const messageContainer = document.getElementById('aiChatMessages');
-            const userText = inputField.value.trim();
 
+            if (!inputField || !messageContainer) return;
+
+            const userText = inputField.value.trim();
             if (!userText) return;
 
-            // Thêm tin nhắn người dùng lên khung chat
+            if (!GEMINI_API_KEY || GEMINI_API_KEY.trim() === '') {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'ai-message bot';
+                errorDiv.textContent = '❌ Chưa cấu hình Gemini API key.';
+                messageContainer.appendChild(errorDiv);
+                return;
+            }
+
+            // Hiển thị tin nhắn người dùng
             const userMsgDiv = document.createElement('div');
             userMsgDiv.className = 'ai-message user';
             userMsgDiv.textContent = userText;
             messageContainer.appendChild(userMsgDiv);
 
             inputField.value = '';
+            inputField.disabled = true;
             messageContainer.scrollTop = messageContainer.scrollHeight;
 
-            // Hiển thị trạng thái đang trả lời của AI
+            // Loading
             const botLoadingDiv = document.createElement('div');
             botLoadingDiv.className = 'ai-message bot';
-            botLoadingDiv.textContent = "AI đang suy nghĩ...";
+            botLoadingDiv.textContent = '🤖 AI đang suy nghĩ...';
             messageContainer.appendChild(botLoadingDiv);
             messageContainer.scrollTop = messageContainer.scrollHeight;
 
-            try {
-                // Đã chuyển sangAuthorization Header chuẩn Bearer dành cho Key dạng AQ.Ab8...
-                const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${GEMINI_API_KEY}`
-                    },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: `Bạn là HNG AI Assistant của HNG Academy. Hãy trả lời bằng tiếng Việt, thân thiện, dễ hiểu và ưu tiên hỗ trợ học tập, Excel, Word, PowerPoint, lập trình và công nghệ.\n\nCâu hỏi: ${userText}`
-                            }]
-                        }]
-                    })
-                });
+            // Thêm câu hỏi vào lịch sử
+            aiConversationHistory.push({
+                role: 'user',
+                parts: [{ text: userText }]
+            });
 
-                const data = await response.json();
+            // Giữ tối đa 20 lượt để request không phình quá lớn
+            if (aiConversationHistory.length > 40) {
+                aiConversationHistory = aiConversationHistory.slice(-40);
+            }
+
+            try {
+                const response = await fetch(
+                    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-goog-api-key': GEMINI_API_KEY
+                        },
+                        body: JSON.stringify({
+                            systemInstruction: {
+                                parts: [
+                                    { text: AI_SYSTEM_INSTRUCTION }
+                                ]
+                            },
+                            contents: aiConversationHistory,
+                            generationConfig: {
+                                temperature: 0.8,
+                                topP: 0.95,
+                                maxOutputTokens: 2048
+                            }
+                        })
+                    }
+                );
+
+                let data = {};
+                try {
+                    data = await response.json();
+                } catch (jsonError) {
+                    console.error('Không đọc được JSON từ Gemini:', jsonError);
+                }
+
                 botLoadingDiv.remove();
 
-                if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-                    const aiReply = data.candidates[0].content.parts[0].text;
-                    const botMsgDiv = document.createElement('div');
-                    botMsgDiv.className = 'ai-message bot';
-                    botMsgDiv.textContent = aiReply;
-                    messageContainer.appendChild(botMsgDiv);
-                } else {
+                if (!response.ok) {
+                    console.error('Gemini API Error:', data);
+
+                    // Nếu request lỗi, bỏ câu user cuối khỏi history để lần sau thử lại sạch.
+                    aiConversationHistory.pop();
+
                     const errorDiv = document.createElement('div');
                     errorDiv.className = 'ai-message bot';
                     errorDiv.textContent = data?.error?.message
-                        ? `API lỗi: ${data.error.message}`
-                        : "Xin lỗi, tôi không thể phản hồi lúc này.";
+                        ? `❌ Gemini API lỗi: ${data.error.message}`
+                        : `❌ Gemini API trả về lỗi HTTP ${response.status}.`;
+                    messageContainer.appendChild(errorDiv);
+                    return;
+                }
+
+                const aiReply = data?.candidates?.[0]?.content?.parts
+                    ?.map(part => part.text || '')
+                    .join('')
+                    .trim();
+
+                if (aiReply) {
+                    // Lưu câu trả lời của AI để lượt sau hiểu ngữ cảnh.
+                    aiConversationHistory.push({
+                        role: 'model',
+                        parts: [{ text: aiReply }]
+                    });
+
+                    const botMsgDiv = document.createElement('div');
+                    botMsgDiv.className = 'ai-message bot';
+                    botMsgDiv.innerHTML = renderAiMarkdown(aiReply);
+                    messageContainer.appendChild(botMsgDiv);
+
+                    // Cho MathJax render lại công thức LaTeX vừa thêm vào DOM.
+                    if (window.MathJax && window.MathJax.typesetPromise) {
+                        window.MathJax.typesetPromise([botMsgDiv]).catch(err =>
+                            console.warn('MathJax render error:', err)
+                        );
+                    }
+                } else {
+                    aiConversationHistory.pop();
+
+                    const reason = data?.promptFeedback?.blockReason;
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'ai-message bot';
+                    errorDiv.textContent = reason
+                        ? `⚠️ Gemini không thể xử lý yêu cầu: ${reason}`
+                        : '⚠️ Gemini không trả về nội dung. Vui lòng thử lại.';
                     messageContainer.appendChild(errorDiv);
                 }
+
             } catch (error) {
+                console.error('HNG AI Error:', error);
+
                 botLoadingDiv.remove();
+                aiConversationHistory.pop();
+
                 const errorDiv = document.createElement('div');
                 errorDiv.className = 'ai-message bot';
-                errorDiv.textContent = "Lỗi kết nối đến máy chủ Gemini.";
+                errorDiv.textContent =
+                    `❌ Không thể kết nối Gemini: ${error.message || 'Lỗi kết nối mạng.'}`;
                 messageContainer.appendChild(errorDiv);
+            } finally {
+                inputField.disabled = false;
+                inputField.focus();
+                messageContainer.scrollTop = messageContainer.scrollHeight;
             }
-
-            messageContainer.scrollTop = messageContainer.scrollHeight;
         }
 
         let currentTargetDownloadUrl = "";
